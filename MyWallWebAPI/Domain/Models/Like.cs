@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MyWallWebAPI.Domain.Models
 {
-    public class Post
+    public class Like
     {
         public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string Conteudo { get; set; }
         public DateTime Data { get; set; }
-        public int LikesCount { get; set; }
-
-        [JsonIgnore]
-        public List<Like> Likes { get; set; } 
-
         public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+        public int PostId { get; set; }
+        public Post Post { get; set; }
+
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RAM+L0Z/ltiwM2Hjv2+z/GXJvQ+87qJpVKBlCx9MoEQriZpOP5WiaUhTDkketKq4gW4eFvdxXe8zIeQ1/lkIzA==",
+  "dgSpecHash": "EfXD5S1mKcMV2cxdk2cu5amLAUwWAKPS80nBln1QBSdY3oRVUZxE7bqMoD3jvPBbVnd3UlbP4J2yUjCUfoExrw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\MyWallWebAPI\\MyWallWebAPI\\MyWallWebAPI.csproj",
+  "projectFilePath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\curso-dotnet-core-web-api\\MyWallWebAPI\\MyWallWebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vitor\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Vitor\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

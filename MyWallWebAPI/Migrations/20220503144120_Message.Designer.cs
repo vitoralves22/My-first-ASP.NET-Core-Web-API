@@ -9,8 +9,8 @@ using MyWallWebAPI.Infrastructure.Data.Contexts;
 namespace MyWallWebAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20220419194407_Authentication")]
-    partial class Authentication
+    [Migration("20220503144120_Message")]
+    partial class Message
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -217,11 +217,65 @@ namespace MyWallWebAPI.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("MyWallWebAPI.Post", b =>
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Like", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Like");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ReceiverId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Message");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Conteudo")
                         .HasColumnType("longtext");
@@ -229,10 +283,15 @@ namespace MyWallWebAPI.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Titulo")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Post");
                 });
@@ -293,6 +352,59 @@ namespace MyWallWebAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Like", b =>
+                {
+                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Likes")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("MyWallWebAPI.Domain.Models.Post", "Post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Message", b =>
+                {
+                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId");
+
+                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId");
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>
+                {
+                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Posts")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Likes");
+
+                    b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>
+                {
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

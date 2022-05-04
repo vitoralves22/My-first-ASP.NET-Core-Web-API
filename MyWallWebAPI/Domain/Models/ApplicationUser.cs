@@ -11,5 +11,8 @@ namespace MyWallWebAPI.Domain.Models
     {
         [JsonIgnore]
         public List<Post> Posts { get; set; }
+
+        [JsonIgnore]
+        public List<Like> Likes { get; set; }
     }
 }

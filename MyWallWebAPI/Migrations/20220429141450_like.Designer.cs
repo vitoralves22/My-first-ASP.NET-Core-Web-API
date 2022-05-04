@@ -9,8 +9,8 @@ using MyWallWebAPI.Infrastructure.Data.Contexts;
 namespace MyWallWebAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20220422132912_UserPostOneToMany")]
-    partial class UserPostOneToMany
+    [Migration("20220429141450_like")]
+    partial class like
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -217,7 +217,31 @@ namespace MyWallWebAPI.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("MyWallWebAPI.Post", b =>
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Like");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -231,6 +255,9 @@ namespace MyWallWebAPI.Migrations
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Titulo")
                         .HasColumnType("longtext");
@@ -300,7 +327,24 @@ namespace MyWallWebAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyWallWebAPI.Post", b =>
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Like", b =>
+                {
+                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Likes")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("MyWallWebAPI.Domain.Models.Post", "Post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>
                 {
                     b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Posts")
@@ -311,7 +355,14 @@ namespace MyWallWebAPI.Migrations
 
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("Likes");
+
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>
+                {
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

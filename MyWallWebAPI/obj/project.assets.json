@@ -2444,11 +2444,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\MyWallWebAPI\\MyWallWebAPI\\MyWallWebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\curso-dotnet-core-web-api\\MyWallWebAPI\\MyWallWebAPI.csproj",
       "projectName": "MyWallWebAPI",
-      "projectPath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\MyWallWebAPI\\MyWallWebAPI\\MyWallWebAPI.csproj",
+      "projectPath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\curso-dotnet-core-web-api\\MyWallWebAPI\\MyWallWebAPI.csproj",
       "packagesPath": "C:\\Users\\Vitor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\MyWallWebAPI\\MyWallWebAPI\\obj\\",
+      "outputPath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\curso-dotnet-core-web-api\\MyWallWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Vitor\\AppData\\Roaming\\NuGet\\NuGet.Config",

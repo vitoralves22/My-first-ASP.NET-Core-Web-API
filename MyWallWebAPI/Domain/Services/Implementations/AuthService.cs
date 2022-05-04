@@ -28,7 +28,6 @@ namespace MyWallWebAPI.Domain.Services.Implementations
         public AuthService(UserRepository userRepository, IConfiguration configuration, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
-
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
@@ -55,6 +54,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
         public async Task<int> UpdateUser(ApplicationUser user)
         {
             ApplicationUser findUser = await _userRepository.GetUser(user.Id);
+
             if (findUser == null)
                 throw new ArgumentException("Usuário não encontrado");
 
@@ -67,6 +67,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
         public async Task<bool> DeleteUser(string userId)
         {
             ApplicationUser findUser = await _userRepository.GetUser(userId);
+
             if (findUser == null)
                 throw new ArgumentException("Usuário não encontrado");
 
@@ -78,6 +79,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
         public async Task<bool> SignUp(SignUpDTO signUpDTO)
         {
             var userExists = await _userManager.FindByNameAsync(signUpDTO.Username);
+
             if (userExists != null)
                 throw new ArgumentException("Username already exists!");
 
@@ -108,6 +110,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
         public async Task<SsoDTO> SignIn(SignInDTO signInDTO)
         {
             var user = await _userManager.FindByNameAsync(signInDTO.Username);
+
             if (user == null)
                 throw new ArgumentException("Usuário não encontrado.");
 

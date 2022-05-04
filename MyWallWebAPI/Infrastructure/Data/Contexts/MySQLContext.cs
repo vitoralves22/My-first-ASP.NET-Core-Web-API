@@ -15,8 +15,11 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
         }
 
         public DbSet<Post> Post { get; set; }
+        public DbSet<Like> Like { get; set; }
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<ApplicationRole> Role { get; set; }
+
+        public DbSet<Message> Message { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +28,10 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
             modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers").HasKey(t => t.Id);
 
             modelBuilder.Entity<Post>();
+
+            modelBuilder.Entity<Like>();
+
+            modelBuilder.Entity<Message>();
         }
     }
 }

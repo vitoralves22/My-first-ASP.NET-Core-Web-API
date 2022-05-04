@@ -79,8 +79,15 @@ namespace MyWallWebAPI
             services.AddScoped<PostRepository>();
             services.AddScoped<IPostService, PostService>();
 
+            services.AddScoped<LikeRepository>();
+            services.AddScoped<ILikeService, LikeService>();
+
             services.AddScoped<UserRepository>();
             services.AddScoped<IAuthService, AuthService>();
+
+            services.AddScoped<MessageRepository>();
+            services.AddScoped<IMessageService, MessageService>();
+
 
             services.AddSwaggerGen(c =>
             {
