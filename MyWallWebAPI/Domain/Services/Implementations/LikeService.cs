@@ -21,26 +21,28 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             _likeRepository = likeRepository;
         }
 
-        public async Task<List<Like>> ListLikes()
+        public async Task<List<LikeDTO>> ListLikes()
         {
-            List<Like> list = await _likeRepository.ListLikes();
+            List<Like> likes = await _likeRepository.ListLikes();
 
-            return list;
+
+            return await GenerateLikesDTOList(likes);
         }
 
-        public async Task<List<Like>> ListLikesByCurrentUser()
+        public async Task<List<LikeDTO>> ListLikesByCurrentUser()
         {
             ApplicationUser currentUser = await _authService.GetCurrentUser();
 
-            List<Like> list = await _likeRepository.ListLikesByApplicationUserId(currentUser.Id);
+            List<Like> likesByUserId = await _likeRepository.ListLikesByApplicationUserId(currentUser.Id);
 
-            return list;
+            return await GenerateLikesDTOList(likesByUserId);
         }
 
-        public async Task<List<Like>> ListLikesByPost(int postId)
+        public async Task<List<LikeDTO>> ListLikesByPost(int postId)
         {
             List<Like> likesByPostId = await _likeRepository.ListLikesByPostId(postId);
-            return likesByPostId;
+
+            return await GenerateLikesDTOList(likesByPostId);
         }
 
         public async Task<Like> GetLike(int likeId)
@@ -58,7 +60,6 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             ApplicationUser currentUser = await _authService.GetCurrentUser();
             Post postFinded = await _postService.GetPost(postId);
             Like likeFinded = await _likeRepository.FindLikeByPostAndUserId(postId, currentUser.Id);
-            //List<Like> myLikes = await _likeRepository.ListLikesByApplicationUserId(currentUser.Id);
 
             if (postFinded == null)
                 throw new ArgumentException("Post não existe!");
@@ -68,14 +69,6 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             if (likeFinded != null)
                 throw new ArgumentException("Você não pode dar mais de um like em um mesmo post!");
-
-            /*foreach (Like like in myLikes) 
-            { 
-                if(like.PostId == postId)
-                {
-                    throw new ArgumentException("Você não pode dar mais de um like em um mesmo post!");
-                }
-            }*/
 
             Like novoLike = new()
             {
@@ -110,6 +103,28 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             List<Like> likesByPostId = await _likeRepository.ListLikesByPostId(postId);
             
             return likesByPostId.Count;
+        }
+
+        public async Task<List<LikeDTO>> GenerateLikesDTOList(List<Like> likes)
+        {
+            List<LikeDTO> likesDTO = new();
+            Post post;
+
+            foreach (Like like in likes)
+            {
+                post = await _postService.GetPost(like.PostId);
+                likesDTO.Add(new LikeDTO()
+                {
+                    LikeId = like.Id,
+                    PostTitle = post.Titulo,
+                    Data = like.Data,
+                    LikeOwner = like.ApplicationUser.UserName,
+                    LikeReceiver = like.Post.ApplicationUser.UserName
+                });
+
+            }
+
+            return likesDTO;
         }
 
     }

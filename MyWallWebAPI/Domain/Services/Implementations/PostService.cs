@@ -1,4 +1,5 @@
 ﻿using MyWallWebAPI.Domain.Models;
+using MyWallWebAPI.Domain.Models.DTOs;
 using MyWallWebAPI.Domain.Services.Interfaces;
 using MyWallWebAPI.Infrastructure.Data.Repositories;
 using System;
@@ -12,28 +13,31 @@ namespace MyWallWebAPI.Domain.Services.Implementations
     {
         private readonly PostRepository _postRepository;
         private readonly IAuthService _authService;
+        //private readonly ILikeService _likeService;
+        private readonly LikeRepository _likeRepository;
 
-        public PostService(PostRepository postRepository, IAuthService authService)
+        public PostService(PostRepository postRepository, IAuthService authService, LikeRepository likeRepository)
         {
             _authService = authService;
             _postRepository = postRepository;
-            _authService = authService;
+            //_likeService = likeService;
+            _likeRepository = likeRepository;
         }
 
-        public async Task<List<Post>> ListPosts()
+        public async Task<List<PostDTO>> ListPosts()
         {
             List<Post> list = await _postRepository.ListPosts();
 
-            return list;
+            return await GeneratePostsDTOList(list);
         }
 
-        public async Task<List<Post>> ListMeusPosts()
+        public async Task<List<PostDTO>> ListPostsByCurrentUser()
         {
             ApplicationUser currentUser = await _authService.GetCurrentUser();
 
             List<Post> list = await _postRepository.ListPostsByApplicationUserId(currentUser.Id);
 
-            return list;
+            return await GeneratePostsDTOList(list);
         }
 
         public async Task<Post> GetPost(int postId)
@@ -46,16 +50,17 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return post;
         }
 
-        public async Task<Post> NovoPost(Post post)
+        public async Task<Post> CreatePost(Post post)
         {
             ApplicationUser currentUser = await _authService.GetCurrentUser();
 
-            Post novoPost = new Post();
-
-            novoPost.ApplicationUserId = currentUser.Id;
-            novoPost.Data = DateTime.Now;
-            novoPost.Titulo = post.Titulo;
-            novoPost.Conteudo = post.Conteudo;
+            Post novoPost = new()
+            {
+                ApplicationUserId = currentUser.Id,
+                Data = DateTime.Now,
+                Titulo = post.Titulo,
+                Conteudo = post.Conteudo
+            };
 
             novoPost = await _postRepository.CreatePost(novoPost);
 
@@ -93,6 +98,34 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             await _postRepository.DeletePostAsync(postId);
 
             return true;
+        }
+
+        public async Task<int> GetCountOfLikesInAPost(int postId)
+        {
+            List<Like> likesByPostId = await _likeRepository.ListLikesByPostId(postId);
+
+            return likesByPostId.Count;
+        }
+
+        public async Task<List<PostDTO>> GeneratePostsDTOList(List<Post> posts)
+        {
+            List<PostDTO> postsDTO = new();
+
+            foreach (Post post in posts)
+            {
+                postsDTO.Add(new PostDTO()
+                {
+                    PostId = post.Id,
+                    Titulo = post.Titulo,
+                    Conteudo = post.Conteudo,
+                    Data = post.Data,
+                    Owner = post.ApplicationUser.UserName,
+                    LikesCount = await GetCountOfLikesInAPost(post.Id)
+                });
+
+            }
+
+            return postsDTO;
         }
     }
 }

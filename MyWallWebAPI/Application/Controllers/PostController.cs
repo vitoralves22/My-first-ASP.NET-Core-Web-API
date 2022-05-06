@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWallWebAPI.Domain.Models;
+using MyWallWebAPI.Domain.Models.DTOs;
 using MyWallWebAPI.Domain.Services.Implementations;
 using MyWallWebAPI.Domain.Services.Interfaces;
 using System;
@@ -27,7 +28,7 @@ namespace MyWallWebAPI.Application.Controllers
         {
             try
             {
-                List<Post> list = await _postService.ListPosts();
+                List<PostDTO> list = await _postService.ListPosts();
 
                 return Ok(list);
             }
@@ -37,12 +38,12 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpGet("list-meus-posts")]
-        public async Task<ActionResult> ListMeusPosts()
+        [HttpGet("list-posts-by-current-user")]
+        public async Task<ActionResult> ListPostsByCurrentUser()
         {
             try
             {
-                List<Post> list = await _postService.ListMeusPosts();
+                List<PostDTO> list = await _postService.ListPostsByCurrentUser();
 
                 return Ok(list);
             }
@@ -67,12 +68,12 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpPost("novo-post")]
-        public async Task<ActionResult> NovoPost([FromBody] Post post)
+        [HttpPost("create-post")]
+        public async Task<ActionResult> CreatePost([FromBody] Post post)
         {
             try
             {
-                post = await _postService.NovoPost(post);
+                post = await _postService.CreatePost(post);
 
                 return Ok(post);
             }
@@ -82,7 +83,7 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpPost("update-post")]
+        [HttpPut("update-post")]
         public async Task<ActionResult> UpdatePost([FromBody] Post post)
         {
             try
@@ -95,7 +96,7 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpPost("delete-post")]
+        [HttpDelete("delete-post")]
         public async Task<ActionResult> DeletePost([FromBody] int postId)
         {
             try

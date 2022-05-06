@@ -12,10 +12,9 @@ namespace MyWallWebAPI.Domain.Models
         public string Titulo { get; set; }
         public string Conteudo { get; set; }
         public DateTime Data { get; set; }
-        public int LikesCount { get; set; }
 
         [JsonIgnore]
-        public List<Like> Likes { get; set; } 
+        public List<Like> Likes { get; set; }
 
         public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

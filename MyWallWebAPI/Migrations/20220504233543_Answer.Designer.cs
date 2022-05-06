@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWallWebAPI.Infrastructure.Data.Contexts;
 
 namespace MyWallWebAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    partial class MySQLContextModelSnapshot : ModelSnapshot
+    [Migration("20220504233543_Answer")]
+    partial class Answer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -251,19 +253,10 @@ namespace MyWallWebAPI.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("DeletedByReceiver")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("DeletedBySender")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("Header")
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsAnswer")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsRead")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("ReceiverId")
@@ -295,6 +288,9 @@ namespace MyWallWebAPI.Migrations
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Titulo")
                         .HasColumnType("longtext");
@@ -388,7 +384,7 @@ namespace MyWallWebAPI.Migrations
                         .HasForeignKey("ReceiverId");
 
                     b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "Sender")
-                        .WithMany("Messages")
+                        .WithMany()
                         .HasForeignKey("SenderId");
 
                     b.Navigation("Receiver");
@@ -408,8 +404,6 @@ namespace MyWallWebAPI.Migrations
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Likes");
-
-                    b.Navigation("Messages");
 
                     b.Navigation("Posts");
                 });

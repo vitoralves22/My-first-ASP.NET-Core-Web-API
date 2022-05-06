@@ -16,16 +16,21 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
 
         public DbSet<Post> Post { get; set; }
         public DbSet<Like> Like { get; set; }
+        public DbSet<Message> Message { get; set; }
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<ApplicationRole> Role { get; set; }
-
-        public DbSet<Message> Message { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>().ToTable("AspNetUsers").HasKey(t => t.Id);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(pt => pt.Messages)
+                .WithOne(p => p.Sender)
+                .HasForeignKey(pt => pt.SenderId);
 
             modelBuilder.Entity<Post>();
 

@@ -69,5 +69,31 @@ namespace MyWallWebAPI.Application.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("update-user")]
+        public async Task<ActionResult> UpdateUser([FromBody] ApplicationUser user)
+        {
+            try
+            {
+                return Ok(await _authService.UpdateUser(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("delete-user")]
+        public async Task<ActionResult> DeletePost([FromBody] string userId)
+        {
+            try
+            {
+                return Ok(await _authService.DeleteUser(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace MyWallWebAPI.Application.Controllers
         {
             try
             {
-                List<Like> list = await _likeService.ListLikes();
+                List<LikeDTO> list = await _likeService.ListLikes();
 
                 return Ok(list);
             }
@@ -37,12 +37,12 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpGet("list-my-likes")]
-        public async Task<ActionResult> ListMyLikes()
+        [HttpGet("list-likes-by-current-user")]
+        public async Task<ActionResult> ListLikesByCurrentUser()
         {
             try
             {
-                List<Like> list = await _likeService.ListLikesByCurrentUser();
+                List<LikeDTO> list = await _likeService.ListLikesByCurrentUser();
 
                 return Ok(list);
             }
@@ -57,7 +57,7 @@ namespace MyWallWebAPI.Application.Controllers
         {
             try
             {
-                List<Like> list = await _likeService.ListLikesByPost(postId);
+                List<LikeDTO> list = await _likeService.ListLikesByPost(postId);
 
                 return Ok(list);
             }
@@ -95,7 +95,7 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpPost("undo-like")]
+        [HttpDelete("undo-like")]
         public async Task<ActionResult> UndoLike([FromBody] int postId)
         {
             try
@@ -108,7 +108,7 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpPost("count-likes-by-post")]
+        [HttpGet("count-likes-by-post")]
         public async Task<ActionResult> CountLikes([FromQuery] int postId)
         {
             try

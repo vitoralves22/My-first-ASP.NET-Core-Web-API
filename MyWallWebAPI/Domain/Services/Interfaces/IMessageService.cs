@@ -1,4 +1,5 @@
 ﻿using MyWallWebAPI.Domain.Models;
+using MyWallWebAPI.Domain.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,14 @@ namespace MyWallWebAPI.Domain.Services.Interfaces
 {
     public interface IMessageService
     {
-        Task<List<Message>> ListMessages();
-        Task<List<Message>> ListMySendedMessages();
-        Task<List<Message>> ListMyReceivedMessages();
-        Task<Message> GetMessageById(int MessageId);
+        Task<List<MessageDTO>> ListMessages();
+        Task<List<MessageDTO>> ListMessagesBySenderId();
+        Task<List<MessageDTO>> ListMessagesByReceiverId();
+        Task<Message> GetMessage(int MessageId);
         Task<int> UpdateMessage(Message message);
+        Task<Message> SendMessage(MessageDTO message);
+        Task<Message> SendAnswer(AnswerDTO answer);
         Task<bool> DeleteMessage(int messageId);
+        Task<List<MessageDTO>> GenerateMessagesDTOList(List<Message> messages);
     }
 }

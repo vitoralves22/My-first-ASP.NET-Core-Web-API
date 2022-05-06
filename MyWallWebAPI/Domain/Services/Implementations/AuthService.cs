@@ -51,31 +51,6 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return user;
         }
 
-        public async Task<int> UpdateUser(ApplicationUser user)
-        {
-            ApplicationUser findUser = await _userRepository.GetUser(user.Id);
-
-            if (findUser == null)
-                throw new ArgumentException("Usuário não encontrado");
-
-            findUser.Email = user.Email;
-            findUser.UserName = user.UserName;
-
-            return await _userRepository.UpdateUser(findUser);
-        }
-
-        public async Task<bool> DeleteUser(string userId)
-        {
-            ApplicationUser findUser = await _userRepository.GetUser(userId);
-
-            if (findUser == null)
-                throw new ArgumentException("Usuário não encontrado");
-
-            await _userRepository.DeleteUser(userId);
-
-            return true;
-        }
-
         public async Task<bool> SignUp(SignUpDTO signUpDTO)
         {
             var userExists = await _userManager.FindByNameAsync(signUpDTO.Username);
@@ -152,6 +127,31 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             ApplicationUser user = await _userRepository.GetUser(userId);
 
             return user;
+        }
+
+        public async Task<int> UpdateUser(ApplicationUser user)
+        {
+            ApplicationUser findUser = await _userRepository.GetUser(user.Id);
+
+            if (findUser == null)
+                throw new ArgumentException("Usuário não encontrado");
+
+            findUser.Email = user.Email;
+            findUser.UserName = user.UserName;
+
+            return await _userRepository.UpdateUser(findUser);
+        }
+
+        public async Task<bool> DeleteUser(string userId)
+        {
+            ApplicationUser findUser = await _userRepository.GetUser(userId);
+
+            if (findUser == null)
+                throw new ArgumentException("Usuário não encontrado");
+
+            await _userRepository.DeleteUser(userId);
+
+            return true;
         }
     }
 }

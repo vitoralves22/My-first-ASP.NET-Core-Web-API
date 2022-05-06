@@ -25,14 +25,14 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
 
         public async Task<List<Message>> ListMessagesBySenderId(string CurrentUserId)
         {
-            List<Message> list = await _context.Message.Where(p => p.SenderId.Equals(CurrentUserId)).OrderBy(p => p.Data).Include(p => p.Sender).ToListAsync();
+            List<Message> list = await _context.Message.Where(p => p.SenderId.Equals(CurrentUserId) && p.DeletedBySender.Equals(false)).OrderBy(p => p.Data).Include(p => p.Sender).ToListAsync();
 
             return list;
         }
 
         public async Task<List<Message>> ListMessagesByReceiverId(string CurrentUserId)
         {
-            List<Message> list = await _context.Message.Where(p => p.ReceiverId.Equals(CurrentUserId)).OrderBy(p => p.Data).Include(p => p.Receiver).ToListAsync();
+            List<Message> list = await _context.Message.Where(p => p.ReceiverId.Equals(CurrentUserId) && p.DeletedByReceiver.Equals(false)).OrderBy(p => p.Data).Include(p => p.Receiver).ToListAsync();
 
             return list;
         }
@@ -55,6 +55,7 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
 
             return ret.Entity;
         }
+
 
         public async Task<int> UpdateMessage(Message message)
         {

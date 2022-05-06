@@ -1,4 +1,5 @@
 ﻿using MyWallWebAPI.Domain.Models;
+using MyWallWebAPI.Domain.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,14 @@ namespace MyWallWebAPI.Domain.Services.Interfaces
 {
     public interface IPostService
     {
-        Task<List<Post>> ListPosts();
-        Task<List<Post>> ListMeusPosts();
+        Task<List<PostDTO>> ListPosts();
+        Task<List<PostDTO>> ListPostsByCurrentUser();
         Task<Post> GetPost(int postId);
-        Task<Post> NovoPost(Post post);
+        Task<Post> CreatePost(Post post);
         Task<int> UpdatePost(Post post);
         Task<bool> DeletePostAsync(int postId);
+        Task<int> GetCountOfLikesInAPost(int postId);
+        Task<List<PostDTO>> GeneratePostsDTOList(List<Post> posts);
+
     }
 }
