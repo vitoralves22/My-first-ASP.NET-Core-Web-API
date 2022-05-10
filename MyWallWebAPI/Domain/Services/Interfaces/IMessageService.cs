@@ -12,10 +12,11 @@ namespace MyWallWebAPI.Domain.Services.Interfaces
         Task<List<MessageDTO>> ListMessages();
         Task<List<MessageDTO>> ListMessagesBySenderId();
         Task<List<MessageDTO>> ListMessagesByReceiverId();
+        Task<List<MessageDTO>> ListMessagesByTargetUserId(string UserId);
         Task<Message> GetMessage(int MessageId);
         Task<int> UpdateMessage(Message message);
-        Task<Message> SendMessage(MessageDTO message);
-        Task<Message> SendAnswer(AnswerDTO answer);
+        Task<String> SendMessage(MessageDTO message);
+        Task<String> SendAnswer(AnswerDTO answer);
         Task<bool> DeleteMessage(int messageId);
         Task<List<MessageDTO>> GenerateMessagesDTOList(List<Message> messages);
     }

@@ -68,6 +68,21 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
+        [HttpGet("list-my-messages-with-user")]
+        public async Task<ActionResult> ListMyMessagesWithUser([FromQuery] string UserId)
+        {
+            try
+            {
+                List<MessageDTO> list = await _messageService.ListMessagesByTargetUserId(UserId);
+
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("get-message")]
         public async Task<ActionResult> GetMessage([FromQuery] int messageId)
         {
@@ -88,7 +103,7 @@ namespace MyWallWebAPI.Application.Controllers
         {
             try
             {
-                Message message = await _messageService.SendMessage(messageDTO);
+                String message = await _messageService.SendMessage(messageDTO);
 
                 return Ok(message);
             }
@@ -103,7 +118,7 @@ namespace MyWallWebAPI.Application.Controllers
         {
             try
             {
-                Message answer = await _messageService.SendAnswer(answerDTO);
+                String answer = await _messageService.SendAnswer(answerDTO);
 
                 return Ok(answer);
             }

@@ -55,6 +55,25 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return await GenerateMessagesDTOList(receivedMesssages);
         }
 
+        public async Task<List<MessageDTO>> ListMessagesByTargetUserId(string userId)
+        {
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
+            List<Message> chat = await _messageRepository.ListMessagesBetweenUsers(currentUser.Id, userId); ;
+             
+            foreach (Message message in chat)
+            {
+                if (message.IsRead == false)
+                {
+                    message.IsRead = true;
+                    await _messageRepository.UpdateMessage(message);
+                }
+            }
+
+            List<MessageDTO> chatDTO = await GenerateMessagesDTOList(chat);
+
+            return chatDTO;
+        }
+
         public async Task<Message> GetMessage(int MessageId)
         {
             Message Message = await _messageRepository.GetMessageById(MessageId);
@@ -71,7 +90,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return Message;
         }
 
-        public async Task<Message> SendMessage(MessageDTO messageDTO)
+        public async Task<String> SendMessage(MessageDTO messageDTO)
         {
             ApplicationUser currentUser = await _authService.GetCurrentUser();
             ApplicationUser receiver = await _authService.GetUserById(messageDTO.ReceiverId);
@@ -94,16 +113,16 @@ namespace MyWallWebAPI.Domain.Services.Implementations
                 Data = DateTime.Now,
                 IsAnswer = false,
                 IsRead = false,
-                DeletedBySender = false,
-                DeletedByReceiver = false  
+                IsDeletedBySender = false,
+                IsDeletedByReceiver = false  
             };
 
             await _messageRepository.CreateMessage(message);
 
-            return message;
+            return "Mensagem Enviada";
         }
 
-        public async Task<Message> SendAnswer(AnswerDTO answerDTO)
+        public async Task<String> SendAnswer(AnswerDTO answerDTO)
         {
             ApplicationUser currentUser = await _authService.GetCurrentUser();
             Message message = await _messageRepository.GetMessageById(answerDTO.MessageId);
@@ -127,7 +146,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             await _messageRepository.CreateMessage(answer);
 
-            return answer;
+            return "Resposta Enviada";
         }
 
         public async Task<bool> DeleteMessage(int messageId)
@@ -146,13 +165,13 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             if ((findMessage.SenderId == currentUser.Id) && (findMessage.IsRead == true)) 
             {
-                findMessage.DeletedBySender = true;
+                findMessage.IsDeletedBySender = true;
                 await _messageRepository.UpdateMessage(findMessage);
             }
 
             if (findMessage.ReceiverId == currentUser.Id)
             {
-                findMessage.DeletedByReceiver = true;
+                findMessage.IsDeletedByReceiver = true;
                 await _messageRepository.UpdateMessage(findMessage);
             }
 
@@ -199,6 +218,17 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             }
 
             return messagesDTO;
+        }
+
+        public async Task<int> compare(int a, int b)
+        {
+            if (a < b) {
+                return -1;
+            }
+            if (a > b) {
+                return 1;
+            }
+            return 0;
         }
 
     }

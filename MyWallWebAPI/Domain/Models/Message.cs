@@ -12,8 +12,8 @@ namespace MyWallWebAPI.Domain.Models
         public string Header { get; set; }
         public bool IsRead { get; set; }
         public bool IsAnswer { get; set; }
-        public bool DeletedBySender { get; set; }
-        public bool DeletedByReceiver { get; set; }
+        public bool IsDeletedBySender { get; set; }
+        public bool IsDeletedByReceiver { get; set; }
         public string SenderId { get; set; }
         public ApplicationUser Sender { get; set; }
         public string ReceiverId { get; set; }
