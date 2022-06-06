@@ -9,8 +9,8 @@ using MyWallWebAPI.Infrastructure.Data.Contexts;
 namespace MyWallWebAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20220509134710_IsDeletedByReceiver")]
-    partial class IsDeletedByReceiver
+    [Migration("20220511184935_data")]
+    partial class data
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -217,6 +217,35 @@ namespace MyWallWebAPI.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Chat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Chat");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.ChatUser", b =>
+                {
+                    b.Property<int>("ChatId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("ChatId", "ApplicationUserId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("ChatUser");
+                });
+
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.Like", b =>
                 {
                     b.Property<int>("Id")
@@ -247,6 +276,9 @@ namespace MyWallWebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("ChatId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .HasColumnType("longtext");
 
@@ -268,15 +300,12 @@ namespace MyWallWebAPI.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("ReceiverId")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("SenderId")
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ReceiverId");
+                    b.HasIndex("ChatId");
 
                     b.HasIndex("SenderId");
 
@@ -366,6 +395,25 @@ namespace MyWallWebAPI.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.ChatUser", b =>
+                {
+                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("ChatUsers")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyWallWebAPI.Domain.Models.Chat", "Chat")
+                        .WithMany("ChatUsers")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Chat");
+                });
+
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.Like", b =>
                 {
                     b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "ApplicationUser")
@@ -385,15 +433,17 @@ namespace MyWallWebAPI.Migrations
 
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.Message", b =>
                 {
-                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "Receiver")
-                        .WithMany()
-                        .HasForeignKey("ReceiverId");
+                    b.HasOne("MyWallWebAPI.Domain.Models.Chat", "Chat")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "Sender")
                         .WithMany("Messages")
                         .HasForeignKey("SenderId");
 
-                    b.Navigation("Receiver");
+                    b.Navigation("Chat");
 
                     b.Navigation("Sender");
                 });
@@ -409,11 +459,20 @@ namespace MyWallWebAPI.Migrations
 
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("ChatUsers");
+
                     b.Navigation("Likes");
 
                     b.Navigation("Messages");
 
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Chat", b =>
+                {
+                    b.Navigation("ChatUsers");
+
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>

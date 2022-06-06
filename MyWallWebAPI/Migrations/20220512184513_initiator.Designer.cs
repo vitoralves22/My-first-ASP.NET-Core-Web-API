@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWallWebAPI.Infrastructure.Data.Contexts;
 
 namespace MyWallWebAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    partial class MySQLContextModelSnapshot : ModelSnapshot
+    [Migration("20220512184513_initiator")]
+    partial class initiator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,7 +293,16 @@ namespace MyWallWebAPI.Migrations
                     b.Property<string>("Header")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsAnswer")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsDeletedByReceiver")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsDeletedBySender")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsRead")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SenderId")
@@ -313,12 +324,6 @@ namespace MyWallWebAPI.Migrations
 
                     b.Property<int>("MessageId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsDeletedByReceiver")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("ReceiverId", "MessageId");
 

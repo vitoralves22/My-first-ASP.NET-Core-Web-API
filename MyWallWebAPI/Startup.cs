@@ -86,7 +86,10 @@ namespace MyWallWebAPI
             services.AddScoped<IAuthService, AuthService>();
 
             services.AddScoped<MessageRepository>();
-            services.AddScoped<IMessageService, MessageService>();
+            services.AddScoped<ChatRepository>();
+            services.AddScoped<IChatService, ChatService>();
+
+
 
 
             services.AddSwaggerGen(c =>

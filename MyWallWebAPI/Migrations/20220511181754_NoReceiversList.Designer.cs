@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWallWebAPI.Infrastructure.Data.Contexts;
 
 namespace MyWallWebAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    partial class MySQLContextModelSnapshot : ModelSnapshot
+    [Migration("20220511181754_NoReceiversList")]
+    partial class NoReceiversList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,15 +223,7 @@ namespace MyWallWebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("InitiatorId")
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("InitiatorId");
 
                     b.ToTable("Chat");
                 });
@@ -291,7 +285,16 @@ namespace MyWallWebAPI.Migrations
                     b.Property<string>("Header")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsAnswer")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsDeletedByReceiver")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsDeletedBySender")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsRead")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SenderId")
@@ -304,27 +307,6 @@ namespace MyWallWebAPI.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Message");
-                });
-
-            modelBuilder.Entity("MyWallWebAPI.Domain.Models.MessageReceiver", b =>
-                {
-                    b.Property<string>("ReceiverId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("MessageId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeletedByReceiver")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("ReceiverId", "MessageId");
-
-                    b.HasIndex("MessageId");
-
-                    b.ToTable("MessageReceiver");
                 });
 
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>
@@ -410,15 +392,6 @@ namespace MyWallWebAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Chat", b =>
-                {
-                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "Initiator")
-                        .WithMany("Chats")
-                        .HasForeignKey("InitiatorId");
-
-                    b.Navigation("Initiator");
-                });
-
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.ChatUser", b =>
                 {
                     b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "ApplicationUser")
@@ -472,25 +445,6 @@ namespace MyWallWebAPI.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("MyWallWebAPI.Domain.Models.MessageReceiver", b =>
-                {
-                    b.HasOne("MyWallWebAPI.Domain.Models.Message", "Message")
-                        .WithMany("MessageReceivers")
-                        .HasForeignKey("MessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "Receiver")
-                        .WithMany("MessageReceivers")
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Message");
-
-                    b.Navigation("Receiver");
-                });
-
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>
                 {
                     b.HasOne("MyWallWebAPI.Domain.Models.ApplicationUser", "ApplicationUser")
@@ -502,13 +456,9 @@ namespace MyWallWebAPI.Migrations
 
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Chats");
-
                     b.Navigation("ChatUsers");
 
                     b.Navigation("Likes");
-
-                    b.Navigation("MessageReceivers");
 
                     b.Navigation("Messages");
 
@@ -520,11 +470,6 @@ namespace MyWallWebAPI.Migrations
                     b.Navigation("ChatUsers");
 
                     b.Navigation("Messages");
-                });
-
-            modelBuilder.Entity("MyWallWebAPI.Domain.Models.Message", b =>
-                {
-                    b.Navigation("MessageReceivers");
                 });
 
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.Post", b =>

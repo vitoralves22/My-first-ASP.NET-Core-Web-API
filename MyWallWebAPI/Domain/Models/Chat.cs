@@ -7,17 +7,13 @@ using System.Threading.Tasks;
 
 namespace MyWallWebAPI.Domain.Models
 {
-    public class ApplicationUser : IdentityUser
+    public class Chat
     {
-        [JsonIgnore]
-        public List<Post> Posts { get; set; }
+        public int Id { get; set; }
 
-        [JsonIgnore]
-        public List<Like> Likes { get; set; }
+        public string InitiatorId { get; set; }
 
-        [JsonIgnore]
-        public List<Chat> Chats { get; set; }
-
+        public ApplicationUser Initiator { get; set; }
 
         [JsonIgnore]
         public List<ChatUser> ChatUsers { get; set; }
@@ -25,7 +21,6 @@ namespace MyWallWebAPI.Domain.Models
         [JsonIgnore]
         public List<Message> Messages { get; set; }
 
-        [JsonIgnore]
-        public List<MessageReceiver> MessageReceivers { get; set; }
+        public DateTime Data { get; set; }
     }
 }

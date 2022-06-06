@@ -23,40 +23,18 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             return list;
         }
 
-        public async Task<List<Message>> ListMessagesBySenderId(string CurrentUserId)
+        public async Task<List<Message>> ListMessagesByChatId(int ChatId)
         {
-            List<Message> list = await _context.Message.Where(p => p.SenderId.Equals(CurrentUserId) && p.IsDeletedBySender.Equals(false)).OrderBy(p => p.Data).Include(p => p.Sender).ToListAsync();
+            List <Message> messages = await _context.Message.Where(p => p.ChatId == ChatId && p.IsDeletedBySender == false).OrderBy(p => p.Data).Include(p => p.MessageReceivers).Include(p => p.Chat).ToListAsync();
 
-            return list;
-        }
-
-        public async Task<List<Message>> ListMessagesByReceiverId(string CurrentUserId)
-        {
-            List<Message> list = await _context.Message.Where(p => p.ReceiverId.Equals(CurrentUserId) && p.IsDeletedByReceiver.Equals(false)).OrderBy(p => p.Data).Include(p => p.Receiver).ToListAsync();
-
-            return list;
-        }
-
-        public async Task<List<Message>> ListMessagesBetweenUsers(string CurrentUserId, string TargetUserId)
-        {
-            List<Message> list = await _context.Message.Where(p => (p.SenderId.Equals(CurrentUserId) && p.ReceiverId.Equals(TargetUserId) && p.IsDeletedBySender.Equals(false))
-                || (p.SenderId.Equals(TargetUserId) && p.ReceiverId.Equals(CurrentUserId) && p.IsDeletedByReceiver.Equals(false))).OrderBy(p => p.Data).ToListAsync();
-
-            return list;
-        }
-
-        public async Task<List<Message>> ListMessagesReceivedFromUserId(string CurrentUserId, string TargetUserId)
-        {
-            List<Message> list = await _context.Message.Where(p => p.SenderId.Equals(TargetUserId) && p.ReceiverId.Equals(CurrentUserId) && p.IsDeletedBySender.Equals(false)).OrderBy(p => p.Data).Include(p => p.Sender).ToListAsync();
-
-            return list;
+            return messages;
         }
 
         public async Task<Message> GetMessageById(int MessageId)
         {
-            Message like = await _context.Message.Include(p => p.Sender).Include(p => p.Receiver).FirstOrDefaultAsync((p => p.Id == MessageId));
+           Message message = await _context.Message.Include(p => p.Sender).Include(p => p.MessageReceivers).FirstOrDefaultAsync((p => p.Id == MessageId));
 
-            return like;
+           return message;
         }
 
         public async Task<Message> CreateMessage(Message message)
