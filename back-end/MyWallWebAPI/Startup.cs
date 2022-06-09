@@ -26,6 +26,7 @@ namespace MyWallWebAPI
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -37,6 +38,14 @@ namespace MyWallWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             string mySqlConnection = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins, builder =>
+                {
+                    builder.WithOrigins("http://localhost:333");
+                });
+            });
 
             services.AddDbContextPool<MySQLContext>(options =>
                 options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
@@ -113,6 +122,14 @@ namespace MyWallWebAPI
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.UseCors(p =>
+            {
+                p.AllowAnyMethod();
+                p.AllowAnyHeader();
+                p.AllowAnyOrigin();
+            });
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

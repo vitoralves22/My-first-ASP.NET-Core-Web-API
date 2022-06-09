@@ -18,21 +18,21 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
 
         public async Task<List<Post>> ListPosts()
         {
-            List<Post> list = await _context.Post.OrderBy(p => p.Data).Include(p => p.ApplicationUser).ToListAsync();
+            List<Post> list = await _context.Post.OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(l => l.Likes).ToListAsync();
 
             return list;
         }
 
         public async Task<List<Post>> ListPostsByApplicationUserId(string applicationUserId)
         {
-            List<Post> list = await _context.Post.Where(p => p.ApplicationUserId.Equals(applicationUserId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).ToListAsync();
+            List<Post> list = await _context.Post.Where(p => p.ApplicationUserId.Equals(applicationUserId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(l => l.Likes).ToListAsync();
 
             return list;
         }
 
         public async Task<Post> GetPostById(int postId)
         {
-            Post post = await _context.Post.Include(p => p.ApplicationUser).FirstOrDefaultAsync((p => p.Id == postId));
+            Post post = await _context.Post.Include(p => p.ApplicationUser).Include(l => l.Likes).FirstOrDefaultAsync((p => p.Id == postId));
 
             return post;
         }

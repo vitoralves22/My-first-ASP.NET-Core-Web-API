@@ -47,14 +47,14 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
 
 
             modelBuilder.Entity<MessageReceiver>()
-                  .HasOne(r => r.Receiver)
-                  .WithMany(mr => mr.MessageReceivers)
-                  .HasForeignKey(ri => ri.ReceiverId);
+                    .HasOne(r => r.Receiver)
+                    .WithMany(mr => mr.MessageReceivers)
+                    .HasForeignKey(ri => ri.ReceiverId);
 
             modelBuilder.Entity<MessageReceiver>()
-                  .HasOne(r => r.Message)
-                  .WithMany(mr => mr.MessageReceivers)
-                  .HasForeignKey(ri => ri.MessageId);
+                    .HasOne(r => r.Message)
+                    .WithMany(mr => mr.MessageReceivers)
+                    .HasForeignKey(ri => ri.MessageId);
 
 
             modelBuilder.Entity<Message>()
@@ -72,10 +72,15 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
                    .WithMany(c => c.Chats)
                    .HasForeignKey(ii => ii.InitiatorId);
 
+            modelBuilder.Entity<Like>()
+                   .HasOne(p => p.Post)
+                   .WithMany(l => l.Likes)
+                   .HasForeignKey(pi => pi.PostId);
+
 
             modelBuilder.Entity<Post>();
 
-            modelBuilder.Entity<Like>();
+           
 
         }
     }

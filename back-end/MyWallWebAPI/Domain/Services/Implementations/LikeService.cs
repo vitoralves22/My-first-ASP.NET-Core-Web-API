@@ -26,7 +26,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             List<Like> likes = await _likeRepository.ListLikes();
 
 
-            return await GenerateLikesDTOList(likes);
+            return LikeDTO.toListDTO(likes);
         }
 
         public async Task<List<LikeDTO>> ListLikesByCurrentUser()
@@ -35,14 +35,14 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             List<Like> likesByUserId = await _likeRepository.ListLikesByApplicationUserId(currentUser.Id);
 
-            return await GenerateLikesDTOList(likesByUserId);
+            return LikeDTO.toListDTO(likesByUserId);
         }
 
         public async Task<List<LikeDTO>> ListLikesByPost(int postId)
         {
             List<Like> likesByPostId = await _likeRepository.ListLikesByPostId(postId);
 
-            return await GenerateLikesDTOList(likesByPostId);
+            return LikeDTO.toListDTO(likesByPostId);
         }
 
         public async Task<Like> GetLike(int likeId)
@@ -98,34 +98,8 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return true;
         }
 
-        public async Task<int> GetCountOfLikesInAPost(int postId)
-        {
-            List<Like> likesByPostId = await _likeRepository.ListLikesByPostId(postId);
-            
-            return likesByPostId.Count;
-        }
 
-        public async Task<List<LikeDTO>> GenerateLikesDTOList(List<Like> likes)
-        {
-            List<LikeDTO> likesDTO = new();
-            Post post;
-
-            foreach (Like like in likes)
-            {
-                post = await _postService.GetPost(like.PostId);
-                likesDTO.Add(new LikeDTO()
-                {
-                    LikeId = like.Id,
-                    PostTitle = post.Titulo,
-                    Data = like.Data,
-                    LikeOwner = like.ApplicationUser.UserName,
-                    LikeReceiver = like.Post.ApplicationUser.UserName
-                });
-
-            }
-
-            return likesDTO;
-        }
+        
 
     }
 }

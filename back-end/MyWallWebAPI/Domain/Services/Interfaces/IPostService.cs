@@ -15,8 +15,6 @@ namespace MyWallWebAPI.Domain.Services.Interfaces
         Task<Post> CreatePost(Post post);
         Task<int> UpdatePost(Post post);
         Task<bool> DeletePostAsync(int postId);
-        Task<int> GetCountOfLikesInAPost(int postId);
-        Task<List<PostDTO>> GeneratePostsDTOList(List<Post> posts);
 
     }
 }

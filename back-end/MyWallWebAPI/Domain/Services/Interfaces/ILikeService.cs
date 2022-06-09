@@ -14,7 +14,5 @@ namespace MyWallWebAPI.Domain.Services.Interfaces
         Task<Like> GetLike(int likeId);
         Task<Like> DoLike(int postId);
         Task<bool> UndoLike(int postId);
-        Task<int> GetCountOfLikesInAPost(int postId);
-        Task<List<LikeDTO>> GenerateLikesDTOList(List<Like> likes);  
     }
 }

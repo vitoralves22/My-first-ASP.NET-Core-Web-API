@@ -18,14 +18,14 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
 
         public async Task<List<Like>> ListLikes()
         {
-            List<Like> list = await _context.Like.OrderBy(p => p.Data).Include(p => p.ApplicationUser).ToListAsync();
+            List<Like> list = await _context.Like.OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(p => p.Post).ToListAsync();
 
             return list;
         }
 
         public async Task<List<Like>> ListLikesByApplicationUserId(string applicationUserId)
         {
-            List<Like> list = await _context.Like.Where(p => p.ApplicationUserId.Equals(applicationUserId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).ToListAsync();
+            List<Like> list = await _context.Like.Where(p => p.ApplicationUserId.Equals(applicationUserId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(p => p.Post).ToListAsync();
 
             return list;
         }
@@ -39,14 +39,14 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
 
         public async Task<List<Like>> ListLikesByPostId(int postId)
         {
-            List<Like> list = await _context.Like.Where(p => p.PostId.Equals(postId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).ToListAsync();
+            List<Like> list = await _context.Like.Where(p => p.PostId.Equals(postId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(p => p.Post).ToListAsync();
 
             return list;
         }
 
         public async Task<Like> GetLikeById(int likeId)
         {
-            Like like = await _context.Like.Include(p => p.ApplicationUser).FirstOrDefaultAsync((p => p.Id == likeId));
+            Like like = await _context.Like.Include(p => p.ApplicationUser).Include(p => p.Post).FirstOrDefaultAsync((p => p.Id == likeId));
 
             return like;
         }

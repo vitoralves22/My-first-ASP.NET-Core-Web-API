@@ -13,14 +13,12 @@ namespace MyWallWebAPI.Domain.Services.Implementations
     {
         private readonly PostRepository _postRepository;
         private readonly IAuthService _authService;
-        //private readonly ILikeService _likeService;
         private readonly LikeRepository _likeRepository;
 
         public PostService(PostRepository postRepository, IAuthService authService, LikeRepository likeRepository)
         {
             _authService = authService;
             _postRepository = postRepository;
-            //_likeService = likeService;
             _likeRepository = likeRepository;
         }
 
@@ -28,7 +26,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
         {
             List<Post> list = await _postRepository.ListPosts();
 
-            return await GeneratePostsDTOList(list);
+            return PostDTO.toListDTO(list);
         }
 
         public async Task<List<PostDTO>> ListPostsByCurrentUser()
@@ -37,7 +35,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             List<Post> list = await _postRepository.ListPostsByApplicationUserId(currentUser.Id);
 
-            return await GeneratePostsDTOList(list);
+            return PostDTO.toListDTO(list);
         }
 
         public async Task<Post> GetPost(int postId)
@@ -100,32 +98,8 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return true;
         }
 
-        public async Task<int> GetCountOfLikesInAPost(int postId)
-        {
-            List<Like> likesByPostId = await _likeRepository.ListLikesByPostId(postId);
+      
 
-            return likesByPostId.Count;
-        }
-
-        public async Task<List<PostDTO>> GeneratePostsDTOList(List<Post> posts)
-        {
-            List<PostDTO> postsDTO = new();
-
-            foreach (Post post in posts)
-            {
-                postsDTO.Add(new PostDTO()
-                {
-                    PostId = post.Id,
-                    Titulo = post.Titulo,
-                    Conteudo = post.Conteudo,
-                    Data = post.Data,
-                    Owner = post.ApplicationUser.UserName,
-                    LikesCount = await GetCountOfLikesInAPost(post.Id)
-                });
-
-            }
-
-            return postsDTO;
-        }
+       
     }
 }

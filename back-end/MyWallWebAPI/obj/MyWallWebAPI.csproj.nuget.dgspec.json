@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\NewModelWebApi\\curso-dotnet-core-web-api\\MyWallWebAPI\\MyWallWebAPI.csproj": {}
+    "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\My-first-ASP.NET-Core-Web-API\\back-end\\MyWallWebAPI\\MyWallWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\NewModelWebApi\\curso-dotnet-core-web-api\\MyWallWebAPI\\MyWallWebAPI.csproj": {
+    "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\My-first-ASP.NET-Core-Web-API\\back-end\\MyWallWebAPI\\MyWallWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\NewModelWebApi\\curso-dotnet-core-web-api\\MyWallWebAPI\\MyWallWebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\My-first-ASP.NET-Core-Web-API\\back-end\\MyWallWebAPI\\MyWallWebAPI.csproj",
         "projectName": "MyWallWebAPI",
-        "projectPath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\NewModelWebApi\\curso-dotnet-core-web-api\\MyWallWebAPI\\MyWallWebAPI.csproj",
+        "projectPath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\My-first-ASP.NET-Core-Web-API\\back-end\\MyWallWebAPI\\MyWallWebAPI.csproj",
         "packagesPath": "C:\\Users\\Vitor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\NewModelWebApi\\curso-dotnet-core-web-api\\MyWallWebAPI\\obj\\",
+        "outputPath": "C:\\Users\\Vitor\\OneDrive\\Área de Trabalho\\Coding\\My-first-ASP.NET-Core-Web-API\\back-end\\MyWallWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vitor\\AppData\\Roaming\\NuGet\\NuGet.Config",
