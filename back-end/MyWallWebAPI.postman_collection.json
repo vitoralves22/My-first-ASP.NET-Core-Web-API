@@ -1,0 +1,979 @@
+{
+	"info": {
+		"_postman_id": "12d79ce2-cfe8-407a-9034-a39eb3609b15",
+		"name": "MyWallWebAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19878917"
+	},
+	"item": [
+		{
+			"name": "PostController",
+			"item": [
+				{
+					"name": "List Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVml0b3IiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjNlYTc5ZWI2LTFjMmEtNGMyZC1iNTBlLTQ2MThhZTZhNWYyNCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6InZpdG9yQGVtYWlsLmNvbSIsImp0aSI6IjMzMTE5MGYwLTFmZTItNGVmMy1iNWUwLTk2NDZmNmYxNTVkMyIsImV4cCI6MTY1MTcyOTA3NSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM2OSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.uzjrXpF6ZGJWkQwjBDSLfq5PDCTBQI2uL2hbpU8NLBE",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/post/list-posts",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"post",
+								"list-posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Meus Posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQnJ1bm8iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImMyOTIwOTczLWIzMjYtNDgxMy05NDUyLWU2MjU3Mzg4ZDBjYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFsb3cyQGVtYWlsLmNvbSIsImp0aSI6IjE4ODY0NTQyLTc0YzMtNDBjYi04ZWE5LTc2ZWYzYTE1MzAxYiIsImV4cCI6MTY1MDY2MDc4OCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM2OSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.Wa4bLHBYhUhsTrzdqIAhrOckl_MOqyKOsi2OhC3sgXo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/post/list-meus-posts",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"post",
+								"list-meus-posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/post/get-post?postId=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"post",
+								"get-post"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQnJ1bm8iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImMyOTIwOTczLWIzMjYtNDgxMy05NDUyLWU2MjU3Mzg4ZDBjYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFsb3cyQGVtYWlsLmNvbSIsImp0aSI6IjE4ODY0NTQyLTc0YzMtNDBjYi04ZWE5LTc2ZWYzYTE1MzAxYiIsImV4cCI6MTY1MDY2MDc4OCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM2OSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.Wa4bLHBYhUhsTrzdqIAhrOckl_MOqyKOsi2OhC3sgXo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Post Do Bruno\",\r\n    \"conteudo\": \"Olá Mundo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/post/create-post",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"post",
+								"create-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"titulo\": \"Post do Vitor\",\r\n    \"conteudo\": \"Olá Mundo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/post/update-post",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"post",
+								"update-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVml0b3IiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjRlNmVhMWQyLTkzNDMtNDdhYy04OGJiLWFlZjZkMjU4NTZkOSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFsb3dAZW1haWwuY29tIiwianRpIjoiNDJmMmFlYzItNGI4ZC00MzYxLWE2OTYtODRjZmQ4MTMxNmNmIiwiZXhwIjoxNjUwNjQ3MjM2LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjQ0MzY5IiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo0MjAwIn0.fRq-jcqWMTgckphUeY5dlTi-gM-1S-KGP6ymC6DUAC4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/post/delete-post",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"post",
+								"delete-post"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthController",
+			"item": [
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Daniel\",  \r\n    \"email\": \"daniel@email.com\",\r\n    \"password\": \"Aa@123\",\r\n    \"passwordConfirm\": \"Aa@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/auth/sign-up",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Bruno\",    \r\n    \"password\": \"Aa@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/auth/sign-in",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQnJ1bm8iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjRhOTZlZjU1LWM1YmItNDFhNS1hNWY3LTVmMzFlMDMyYTQxMSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImJydW5vQGVtYWlsLmNvbSIsImp0aSI6IjNjYjM3ODliLWQ1ZGUtNGJhZS05YzAwLWVmNjUzZGM4MzQwZCIsImV4cCI6MTY1NDYzOTE2NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM2OSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.17hJebwE9wmBvuQqsDIL4UP1wath8dNU9-Tj5_-ETRQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:44377/api/auth/get-current-user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"auth",
+								"get-current-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\" : \"3ea79eb6-1c2a-4c2d-b50e-4618ae6a5f24\",\r\n    \"UserName\" : \"Vitor A.\",\r\n    \"Email\" : \"novo@email.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/auth/update-user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"auth",
+								"update-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44377/api/auth/delete-user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"auth",
+								"delete-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LikeController",
+			"item": [
+				{
+					"name": "List Likes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/like/list-likes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"like",
+								"list-likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Like",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44377/api/like/get-like",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"like",
+								"get-like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Do Like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/like/do-like",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"like",
+								"do-like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Undo Like",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/like/undo-like",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"like",
+								"undo-like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Like By Post",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/like/list-likes-by-post?postId=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"like",
+								"list-likes-by-post"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Like By User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44377/api/like/list-likes-by-current-user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"like",
+								"list-likes-by-current-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MessageController",
+			"item": [
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"receiverId\": \"6291acd7-286d-4c1a-8768-aaef63f65519\",\r\n  \"content\": \"falajao\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/message/send-message",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"message",
+								"send-message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Answer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"MessageId\" : 4,\r\n    \"Content\" : \"jao sim\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/message/send-answer",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"message",
+								"send-answer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List My Received Messages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/message/list-my-received-messages",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"message",
+								"list-my-received-messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List My Sended Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44377/api/message/list-my-sended-messages",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"message",
+								"list-my-sended-messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Message",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "5",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/message/delete-message",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"message",
+								"delete-message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Message",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/message/update-message",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"message",
+								"update-message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44377/api/message/list-messages",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"message",
+								"list-messages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List My Messages With User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44377/api/message/list-my-messages-with-user?UserId=6291acd7-286d-4c1a-8768-aaef63f65519",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"message",
+								"list-my-messages-with-user"
+							],
+							"query": [
+								{
+									"key": "UserId",
+									"value": "6291acd7-286d-4c1a-8768-aaef63f65519"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ChatController",
+			"item": [
+				{
+					"name": "Iniciate Chat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"4a96ef55-c5bb-41a5-a5f7-5f31e032a411\", \"cb9ccbaf-a7a1-4213-b1a2-64376aae0d53\", \"dcd08b91-9ebe-4169-a5b2-c3584f5a59b5\", \"dcd08b91-9ebe-4169-a5b2-c3584f5a59b5\"]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/Chat/initiate-chat",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"Chat",
+								"initiate-chat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n     \"ChatId\": \"1\",\r\n     \"Content\": \"Aoo\"\r\n }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/Chat/send-message",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"Chat",
+								"send-message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Message",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/Chat/delete-message",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"Chat",
+								"delete-message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Messages In Chat",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/Chat/list-messages-from-chat?ChatId=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"Chat",
+								"list-messages-from-chat"
+							],
+							"query": [
+								{
+									"key": "ChatId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Message",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"\",\r\n    \"content\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44377/api/Chat/update-message",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44377",
+							"path": [
+								"api",
+								"Chat",
+								"update-message"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQnJ1bm8iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjRhOTZlZjU1LWM1YmItNDFhNS1hNWY3LTVmMzFlMDMyYTQxMSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImJydW5vQGVtYWlsLmNvbSIsImp0aSI6ImJjMmVmMmEwLWQ5ZGEtNDk1Zi05MGQyLTExM2RjZDNiMTQwYiIsImV4cCI6MTY1NDcyMDkxNiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo0NDM2OSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NDIwMCJ9.NCMkTINspJ3Gm0syoX7sg8mntdRg2uiEqi22G664y8Q",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
