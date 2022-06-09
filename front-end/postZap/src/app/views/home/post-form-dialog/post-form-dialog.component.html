@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Novo Post</h1>
+<div mat-dialog-content>
+    <form class="example-form" [formGroup]="postForm">
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Titulo</mat-label>
+            <input matInput placeholder="" formControlName="titulo" name="titulo">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Conteudo</mat-label>
+            <input matInput placeholder="" formControlName="conteudo" name="conteudo">
+        </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="createPost()">Adicionar</button>
+</div>

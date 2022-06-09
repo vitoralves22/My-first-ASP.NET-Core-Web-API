@@ -1,0 +1,48 @@
+<mat-tab-group mat-align-tabs="start" style="padding-top: 40px; padding-left: 2%; padding-right: 2%">
+  <!-- <mat-tab label="Próximas">
+  </mat-tab> -->
+  <mat-tab label="Posts">
+    <mat-progress-bar *ngIf="!loaded" mode="indeterminate"></mat-progress-bar>
+    <div *ngIf="loaded" fxLayout="row wrap" fxLayoutAlign="start center" style="padding: 2%">
+
+      <ng-container *ngFor="let post of posts" style="margin: 0.5%">
+        <mat-card class="vs-mat-card-post" fxFlex="0 1 calc(33.3% - 11px)" fxFlex.lt-md="0 1 calc(50% - 11px)"
+          fxFlex.lt-sm="100%">
+          <mat-card-title class="vs-mat-card-title-post">
+            <div class="row">
+              <p>
+                <span style="font-size: 0.9rem;" fxFlex="70" fxLayoutAlign="start center">{{post.postId}}</span>
+                <span style="font-size: 0.9rem;" fxFlex="70" fxLayoutAlign="start center">{{post.titulo}}</span>
+                <span fxFlex></span>
+                <mat-chip class="vs-mat-chip-date" fxFlex="25" fxLayoutAlign="center center">
+                  <span style="font-size: 0.7rem;">{{post.data | localDateTime}}</span>
+                </mat-chip>
+              </p>
+            </div>
+          </mat-card-title>
+          <mat-card-content >
+            <mat-card-content fxLayoutAlign="center center">
+              <p>
+                {{post.conteudo}}
+              </p>
+            </mat-card-content>
+
+            <mat-card-content >
+              <div fxLayout="row" fxLayoutAlign="end end" >
+                <button mat-icon-button color="primary" (click)="likePost(post.postId)" aria-label="Like this post.">
+                  <mat-icon>thumb_up</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="deletePost(post.postId)" aria-label="Delete this post.">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <!-- <div fxLayout="row" fxLayoutAlign="start end" >
+                <span style="font-size: 0.7rem;">Likes: {{post.likesCount}}</span>
+              </div> -->
+            </mat-card-content>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
+  </mat-tab>
+</mat-tab-group>
