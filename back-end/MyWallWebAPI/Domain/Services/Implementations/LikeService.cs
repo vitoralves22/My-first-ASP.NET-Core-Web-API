@@ -26,7 +26,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             List<Like> likes = await _likeRepository.ListLikes();
 
 
-            return LikeDTO.toListDTO(likes);
+            return await GenerateLikesDTOList(likes);
         }
 
         public async Task<List<LikeDTO>> ListLikesByCurrentUser()
@@ -35,14 +35,14 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             List<Like> likesByUserId = await _likeRepository.ListLikesByApplicationUserId(currentUser.Id);
 
-            return LikeDTO.toListDTO(likesByUserId);
+            return await GenerateLikesDTOList(likesByUserId);
         }
 
         public async Task<List<LikeDTO>> ListLikesByPost(int postId)
         {
             List<Like> likesByPostId = await _likeRepository.ListLikesByPostId(postId);
 
-            return LikeDTO.toListDTO(likesByPostId);
+            return await GenerateLikesDTOList(likesByPostId);
         }
 
         public async Task<Like> GetLike(int likeId)
@@ -92,14 +92,34 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             if (findLike == null)
                 throw new ArgumentException("Like não existe!");
 
-            
+
             await _likeRepository.DeleteLikeAsync(findLike.Id);
 
             return true;
         }
 
 
-        
+        public async Task<List<LikeDTO>> GenerateLikesDTOList(List<Like> likes)
+        {
+            List<LikeDTO> likesDTO = new();
+            Post post;
+
+            foreach (Like like in likes)
+            {
+                post = await _postService.GetPost(like.PostId);
+                likesDTO.Add(new LikeDTO()
+                {
+                    LikeId = like.Id,
+                    PostTitle = post.Titulo,
+                    Data = like.Data,
+                    LikeOwner = like.ApplicationUser.UserName,
+                    LikeReceiver = like.Post.ApplicationUser.UserName
+                });
+
+            }
+
+            return likesDTO;
+        }
 
     }
 }

@@ -108,17 +108,5 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpGet("count-likes-by-post")]
-        public async Task<ActionResult> CountLikes([FromQuery] int postId)
-        {
-            try
-            {
-                return Ok(await _likeService.GetCountOfLikesInAPost(postId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }

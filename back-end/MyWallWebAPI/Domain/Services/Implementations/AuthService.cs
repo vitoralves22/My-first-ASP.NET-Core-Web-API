@@ -117,7 +117,10 @@ namespace MyWallWebAPI.Domain.Services.Implementations
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
 
-            return new SsoDTO(new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);
+            SsoDTO ssoDTO = new(new JwtSecurityTokenHandler().WriteToken(token), token.ValidTo);
+            ssoDTO.me = user;
+
+            return ssoDTO;
         }
 
         public async Task<ApplicationUser> GetCurrentUser()

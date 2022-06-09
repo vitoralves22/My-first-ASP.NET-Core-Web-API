@@ -13,27 +13,5 @@ namespace MyWallWebAPI.Domain.Models
         public DateTime Data { get; set; }
         public string PostTitle { get; set; }
         public string LikeReceiver { get; set; }
-
-
-        public static List<LikeDTO> toListDTO (List<Like> likes)
-        {
-            List<LikeDTO> likesDTO = new();
-
-            foreach (Like like in likes)
-            {
-               
-                likesDTO.Add(new LikeDTO()
-                {
-                    LikeId = like.Id,
-                    PostTitle = like.Post.Titulo,
-                    Data = like.Data,
-                    LikeOwner = like.ApplicationUser.UserName,
-                    LikeReceiver = like.Post.ApplicationUser.UserName
-                });
-
-            }
-
-            return likesDTO;
-        }
     }
 }

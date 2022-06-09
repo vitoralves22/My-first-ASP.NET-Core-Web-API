@@ -9,6 +9,7 @@ namespace MyWallWebAPI.Domain.Models.DTOs
     {
         public string access_token { get; set; }
         public DateTime expiration { get; set; }
+        public ApplicationUser me { get; set; }
 
         public SsoDTO(string access_token, DateTime expiration)
         {
