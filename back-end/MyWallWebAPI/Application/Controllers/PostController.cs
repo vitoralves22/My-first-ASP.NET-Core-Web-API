@@ -97,7 +97,7 @@ namespace MyWallWebAPI.Application.Controllers
         }
 
         [HttpDelete("delete-post")]
-        public async Task<ActionResult> DeletePost([FromBody] int postId)
+        public async Task<ActionResult> DeletePost([FromQuery] int postId)
         {
             try
             {

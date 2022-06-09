@@ -28,6 +28,7 @@ import { ErrorInterceptor, JwtInterceptor } from './shared/helpers';
 import { AuthenticationService } from './shared/service';
 import { PostService } from './shared/service/post.service';
 import { LoginComponent } from './views/home/login';
+import { RegisterFormDialogComponent } from './views/home/register-form-dialog/register-form-dialog.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { LoginComponent } from './views/home/login';
     LocalDateTimePipe,
     PostListComponent,
     PostFormDialogComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterFormDialogComponent
   ],
   imports: [
     BrowserModule,

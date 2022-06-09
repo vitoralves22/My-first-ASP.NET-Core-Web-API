@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Nova Conta</h1>
+<div mat-dialog-content>
+    <form class="example-form" [formGroup]="registerForm">
+
+        <mat-form-field class="example-full-width">
+        <mat-label>Nickname</mat-label>
+        <input matInput formControlName="Username" name="Username">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="Email" name="Email">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="Password" name="Password">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+        <mat-label>Password Confirm</mat-label>
+        <input type="password" matInput formControlName="PasswordConfirm" name="PasswordConfirm">
+        </mat-form-field>
+
+    </form>
+</div>
+<div mat-dialog-actions fxLayoutAlign="start start">
+  <button mat-raised-button color="primary" (click) = "newAccount()">Create Account</button>
+  <button mat-raised-button color="warn" (click) = "cancel()">Cancelar</button>
+</div>
