@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/service';
 import { PostFormDialogComponent } from './post-form-dialog/post-form-dialog.component';
 
 @Component({
@@ -11,7 +13,9 @@ import { PostFormDialogComponent } from './post-form-dialog/post-form-dialog.com
 export class HomeComponent implements OnInit {
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -26,5 +30,10 @@ export class HomeComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+}
 
 }
