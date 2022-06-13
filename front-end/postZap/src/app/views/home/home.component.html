@@ -1,12 +1,16 @@
-<mat-toolbar>
-  <mat-toolbar-row style = "font-size: 1.5rem; height: 80px;">
-    <span>PostZap<mat-icon>date_range</mat-icon></span>
-    <span class="example-spacer"></span>
-    <button mat-raised-button (click)="addPost()" style="margin: 5px;" ><mat-icon>add</mat-icon>Post</button>
-    <button mat-raised-button (click)="logout()">Logout</button>
-  </mat-toolbar-row>
-</mat-toolbar>
-<!-- <app-live-list></app-live-list> -->
-<app-post-list></app-post-list>
-
-
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="assets/telegram.svg" alt="">
+    </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+      data-target="#navbar4">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar4">
+      <ul class="navbar-nav mr-auto pl-lg-4">
+        <li class="nav-item px-lg-2 active"> <a class="nav-link" href="#"> <span
+              class="d-inline-block d-lg-none icon-width"><i class="fas fa-home"></i></span>Home</a> </li>
+      </ul>
+    </div>
+  </div>
+</nav>
