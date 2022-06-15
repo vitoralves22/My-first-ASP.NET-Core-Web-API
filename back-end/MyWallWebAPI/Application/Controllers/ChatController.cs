@@ -23,7 +23,21 @@ namespace MyWallWebAPI.Application.Controllers
             _chatService = chatService;
         }
 
-      
+        [HttpGet("list-chat")]
+        public async Task<ActionResult> ListPosts()
+        {
+            try
+            {
+                List<ChatDTO> list = await _chatService.ListChat();
+
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("list-messages-from-chat")]
         public async Task<ActionResult> ListMessagesInChat([FromQuery] int chatId)
         {

@@ -1,0 +1,65 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a ngbNavLink>Feed</a>
+    <ng-template ngbNavContent>
+      <div class="row card-group vs-div-row-cards-margin">
+        <div class="col-md-4 vs-cards-padding-bottom" *ngFor="let post of posts">
+          <div class="card vs-card">
+            <div class="card-body">
+              <div class="card-title vs-card-title">
+                <p>
+                  <span style="font-size: 0.9rem;">{{post.titulo}}</span>
+                </p>
+              </div>
+              <div class="card-text">
+                <p>
+                  {{post.conteudo}}
+                </p>
+              </div>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-sm" (click)="likePost(post.postId)" aria-label="Like this post.">
+                <img src="assets/thumb.svg" alt="">
+              </button>
+              <button class="btn btn-sm" (click)="deletePost(post.postId)" aria-label="Delete this post.">
+                <img src="assets/trash.svg" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>Meus Posts</a>
+    <ng-template ngbNavContent>
+      <div class="row card-group vs-div-row-cards-margin">
+        <div class="col-md-4 vs-cards-padding-bottom" *ngFor="let post of myPosts">
+          <div class="card vs-card">
+            <div class="card-body">
+              <div class="card-title vs-card-title">
+                <p>
+                  <span style="font-size: 0.9rem;">{{post.titulo}}</span>
+                </p>
+              </div>
+              <div class="card-text">
+                <p>
+                  {{post.conteudo}}
+                </p>
+              </div>
+            </div>
+            <div class="card-footer text-center">
+              <button class="btn btn-sm" (click)="likePost(post.postId)" aria-label="Like this post.">
+                <img src="assets/thumb.svg" alt="">
+              </button>
+              <button class="btn btn-sm" (click)="deletePost(post.postId)" aria-label="Delete this post.">
+                <img src="assets/trash.svg" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

@@ -22,6 +22,25 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             _messageRepository = messageRepository;
         }
 
+        public async Task<List<ChatDTO>> ListChat()
+        {
+            List<Chat> list = await _chatRepository.ListChat();
+            List<ChatDTO> result = ChatDTO.toListDTO(list);
+
+            foreach (ChatDTO chatDTO in result)
+            {
+                List<string> names = new();
+                List<ChatUser> chatUsers = await _chatRepository.GetChatUsersByChatId(chatDTO.ChatId);
+                foreach (ChatUser chatUser in chatUsers)
+                {
+                    names.Add(chatUser.ApplicationUser.UserName);
+                }
+                chatDTO.ChatMembers = names;
+            }
+
+            return result;
+        }
+
 
         public async Task<ChatDTO> ListMessagesInChat(int ChatId)
         {
@@ -31,10 +50,12 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             List<Message> messagesNotDeleted = new();
             ChatDTO chatDTO = new();
+            chatDTO.ChatMembers = new List<string>();
+            chatDTO.ChatId = ChatId;
 
             foreach (ChatUser chatUser in chatUsers)
             {
-                chatDTO.ChatMembers += chatUser.ApplicationUser.UserName + ", ";
+                chatDTO.ChatMembers.Add(chatUser.ApplicationUser.UserName);
             }
 
             foreach (Message message in  messagesFinded)
@@ -64,7 +85,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
                 }             
             }
 
-            chatDTO.MessagesDTO = await GenerateMessagesDTOList(messagesNotDeleted);
+            chatDTO.MessagesDTO = MessageDTO.toListDTO(messagesNotDeleted);
 
             return chatDTO;
         }
@@ -207,38 +228,6 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             findMessage.Content = message.Content;
 
             return await _messageRepository.UpdateMessage(findMessage);
-        }
-
-        public async Task<List<MessageDTO>> GenerateMessagesDTOList(List<Message> messages)
-        {
-            List<MessageDTO> messagesDTO = new();
-            string footer = "lido por: ";
-
-            foreach (Message message in messages)
-            {
-                foreach (MessageReceiver messageReceiver in message.MessageReceivers)
-                {
-                    if(messageReceiver.IsRead == true)
-                    {
-                        footer += messageReceiver.Receiver.UserName + ", ";
-                    }
-                }
-
-                messagesDTO.Add(new MessageDTO()
-                {
-                    ChatId = message.ChatId,
-                    MessageId = message.Id,
-                    SenderId = message.SenderId,
-                    Data = message.Data,
-                    Content = message.Content,
-                    Footer = footer,
-                    SenderName = message.Sender.UserName
-                }) ;
-
-                footer = "lidor por: ";
-            }
-
-            return messagesDTO;
         }
 
        

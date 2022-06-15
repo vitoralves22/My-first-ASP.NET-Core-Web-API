@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MyWallWebAPI.Domain.Models.DTOs
 {
@@ -11,6 +12,39 @@ namespace MyWallWebAPI.Domain.Models.DTOs
         public string SenderId { get; set; }
         public DateTime Data { get; set; }
         public string Footer { get; set; }
+
+
+        public static List<MessageDTO> toListDTO(List<Message> messages)
+        {
+            List<MessageDTO> messagesDTO = new();
+            string footer = "lido por: ";
+
+            foreach (Message message in messages)
+            {
+                foreach (MessageReceiver messageReceiver in message.MessageReceivers)
+                {
+                    if (messageReceiver.IsRead == true)
+                    {
+                        footer += messageReceiver.Receiver.UserName + ", ";
+                    }
+                }
+
+                messagesDTO.Add(new MessageDTO()
+                {
+                    ChatId = message.ChatId,
+                    MessageId = message.Id,
+                    SenderId = message.SenderId,
+                    Data = message.Data,
+                    Content = message.Content,
+                    Footer = footer,
+                    SenderName = message.Sender.UserName
+                });
+
+                footer = "lidor por: ";
+            }
+
+            return messagesDTO;
+        }
 
     }
 }

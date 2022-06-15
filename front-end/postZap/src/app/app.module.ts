@@ -11,13 +11,23 @@ import { LocalDateTimePipe } from './shared/pipe/local-date-time.pipe';
 import { HomeComponent } from './views/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './shared/service';
+import { SidebarComponent } from './views/sidebar/sidebar.component';
+import { NavbarComponent } from './views/navbar/navbar.component';
+import { PostListComponent } from './views/post/post-list/post-list.component';
+import { PostFormComponent } from './views/post/post-form/post-form.component';
+import { ChatListComponent } from './views/chat/chat-list/chat-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LocalDateTimePipe
+    LocalDateTimePipe,
+    SidebarComponent,
+    NavbarComponent,
+    PostListComponent,
+    PostFormComponent,
+    ChatListComponent
   ],
   imports: [
     BrowserModule,

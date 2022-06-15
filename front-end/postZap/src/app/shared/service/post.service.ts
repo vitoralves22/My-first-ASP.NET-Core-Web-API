@@ -19,9 +19,13 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  
+
   public listPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(environment.apiUrl + '/post/list-posts')
+  }
+
+  public listMyPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(environment.apiUrl + '/post/list-posts-by-current-user')
   }
 
   public postPosts(post: any): Observable<Post> {

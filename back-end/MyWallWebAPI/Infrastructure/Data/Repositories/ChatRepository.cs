@@ -16,6 +16,12 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             _context = context;
         }
 
+        public async Task<List<Chat>> ListChat()
+        {
+            List<Chat> list = await _context.Chat.OrderBy(p => p.Data).Include(p => p.Initiator).Include(p => p.ChatUsers).ToListAsync();
+
+            return list;
+        }
 
         public async Task<Chat> GetChatById(int ChatId)
         {
