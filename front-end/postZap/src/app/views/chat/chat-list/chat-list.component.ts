@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterEvent } from '@angular/router';
+import { Chat } from 'src/app/shared/model';
+import { ChatService } from 'src/app/shared/service/chat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-list',
@@ -6,10 +10,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-list.component.css']
 })
 export class ChatListComponent implements OnInit {
-
-  constructor() { }
+  chats?: Chat[];
+  loaded: boolean = false;
+  router!: Router;
+  constructor(
+    public chatService: ChatService
+  ) { }
 
   ngOnInit(): void {
+    this.listChats()
+  }
+
+  listChats(){
+    this.chatService.listChats().subscribe(data =>{
+      this.chats = data;
+      this.loaded = true;
+    });
+  }
+
+  openChat(id: number){
+    this.router.navigateByUrl('expandedchat');
+    this.chatService.listMessagesInChat(id)
   }
 
 }

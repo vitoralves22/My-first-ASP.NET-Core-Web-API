@@ -38,5 +38,7 @@ namespace MyWallWebAPI.Domain.Models.DTOs
             return chatsDTO;
         }
 
+
+
     }
 }

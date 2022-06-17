@@ -43,7 +43,7 @@ namespace MyWallWebAPI.Application.Controllers
         {
             try
             {
-                ChatDTO chat = await _chatService.ListMessagesInChat(chatId);
+                List<MessageDTO> chat = await _chatService.ListMessagesInChat(chatId);
 
                 return Ok(chat);
             }
@@ -102,6 +102,20 @@ namespace MyWallWebAPI.Application.Controllers
             try
             {
                 return Ok(await _chatService.UpdateMessage(message));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("get-chat")]
+        public async Task<ActionResult> GetChat([FromQuery] int chatId)
+        {
+            try
+            {
+
+                return Ok(await _chatService.GetChat(chatId));
             }
             catch (Exception ex)
             {

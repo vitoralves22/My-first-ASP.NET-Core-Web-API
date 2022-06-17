@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Chat } from '../model';
 import { environment } from 'src/environments/environment';
+import { Message } from '../model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class ChatService {
 
   public listChats(): Observable<Chat[]> {
     return this.http.get<Chat[]>(environment.apiUrl + '/chat/list-chat')
+  }
+
+  public listMessagesInChat(id: number): Observable<Message[]> {
+    return this.http.get<Message[]>(`${environment.apiUrl}/chat/list-messages-from-chat?ChatId=`+ id)
   }
 
 }

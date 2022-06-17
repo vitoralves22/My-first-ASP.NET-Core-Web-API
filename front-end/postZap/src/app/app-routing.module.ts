@@ -8,6 +8,7 @@ import { AuthGuard } from './shared/helpers';
 import { PostListComponent } from './views/post/post-list/post-list.component';
 import { PostFormComponent } from './views/post/post-form/post-form.component';
 import { ChatListComponent } from './views/chat/chat-list/chat-list.component';
+import { ExpandedChatComponent } from './views/chat/expanded-chat/expanded-chat.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'postlist', component: PostListComponent },
       { path: 'postform', component: PostFormComponent },
       { path: 'chatlist', component: ChatListComponent },
+      { path: 'expandedchat/:id', component: ExpandedChatComponent },
     ],
   },
 

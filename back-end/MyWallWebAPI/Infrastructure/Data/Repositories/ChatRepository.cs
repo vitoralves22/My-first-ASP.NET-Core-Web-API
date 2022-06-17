@@ -25,7 +25,7 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
 
         public async Task<Chat> GetChatById(int ChatId)
         {
-            Chat chat = await _context.Chat.Where(p => p.Id == ChatId).OrderBy(p => p.Data).Include(p => p.ChatUsers).Include(p => p.Messages).FirstOrDefaultAsync();
+            Chat chat = await _context.Chat.Where(p => p.Id == ChatId).OrderBy(p => p.Data).Include(p => p.ChatUsers).Include(p => p.Messages).Include(p => p.Initiator).FirstOrDefaultAsync();
 
             return chat;
         }

@@ -9,6 +9,7 @@
     <a (click)="c2.toggle()">Chat</a>
     <div #c2="ngbCollapse" [(ngbCollapse)]="isCollapsed2">
       <a [routerLink]="['chatlist']">Listar Chats</a>
+      <a [routerLink]="['expandedchat/1']">ExpandirChat(id=1)</a>
     </div>
   </div>
 

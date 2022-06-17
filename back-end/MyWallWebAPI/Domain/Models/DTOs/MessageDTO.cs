@@ -12,6 +12,7 @@ namespace MyWallWebAPI.Domain.Models.DTOs
         public string SenderId { get; set; }
         public DateTime Data { get; set; }
         public string Footer { get; set; }
+        public bool isMine { get; set; } = false;
 
 
         public static List<MessageDTO> toListDTO(List<Message> messages)

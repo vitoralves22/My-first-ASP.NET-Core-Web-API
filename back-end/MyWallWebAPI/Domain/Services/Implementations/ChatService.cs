@@ -41,14 +41,27 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return result;
         }
 
+        public async Task<Chat> GetChat(int chatId)
+        {
+            Chat chat = await _chatRepository.GetChatById(chatId);
 
-        public async Task<ChatDTO> ListMessagesInChat(int ChatId)
+            if (chat == null)
+                throw new ArgumentException("Post não existe!");
+
+            return chat;
+        }
+
+
+
+
+        public async Task<List<MessageDTO>> ListMessagesInChat(int ChatId)
         {
             ApplicationUser currentUser = await _authService.GetCurrentUser();
             List<Message> messagesFinded = await _messageRepository.ListMessagesByChatId(ChatId);
             List<ChatUser> chatUsers = await _chatRepository.GetChatUsersByChatId(ChatId);
 
             List<Message> messagesNotDeleted = new();
+            List<MessageDTO> messagesDTO = new();
             ChatDTO chatDTO = new();
             chatDTO.ChatMembers = new List<string>();
             chatDTO.ChatId = ChatId;
@@ -85,9 +98,17 @@ namespace MyWallWebAPI.Domain.Services.Implementations
                 }             
             }
 
-            chatDTO.MessagesDTO = MessageDTO.toListDTO(messagesNotDeleted);
+            messagesDTO = MessageDTO.toListDTO(messagesNotDeleted);
 
-            return chatDTO;
+            foreach (MessageDTO messageDTO in messagesDTO)
+            {
+                if(messageDTO.SenderId == currentUser.Id)
+                {
+                    messageDTO.isMine = true;
+                }
+            }
+
+            return messagesDTO;
         }
 
         public async Task<String> IniciateChat(List<string> usersId)

@@ -16,6 +16,7 @@ import { NavbarComponent } from './views/navbar/navbar.component';
 import { PostListComponent } from './views/post/post-list/post-list.component';
 import { PostFormComponent } from './views/post/post-form/post-form.component';
 import { ChatListComponent } from './views/chat/chat-list/chat-list.component';
+import { ExpandedChatComponent } from './views/chat/expanded-chat/expanded-chat.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ChatListComponent } from './views/chat/chat-list/chat-list.component';
     NavbarComponent,
     PostListComponent,
     PostFormComponent,
-    ChatListComponent
+    ChatListComponent,
+    ExpandedChatComponent
   ],
   imports: [
     BrowserModule,
