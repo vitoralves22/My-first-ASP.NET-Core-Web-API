@@ -16,9 +16,9 @@ namespace MyWallWebAPI.Domain.Services.Interfaces
         Task<bool> DeleteMessage(int messageId);
         Task<int> UpdateMessage(Message message);
         Task<ChatDTO> GetChat(int chatId);
-      /*  Task<String> RemoveUserFromChat(int chatId, ApplicationUser User);
-        Task<String> InviteUserToChat(String email);
-        Task<String> AcceptInvitation();*/
+       /* Task<String> RemoveUserFromChat(int chatId, ApplicationUser User);*/
+        Task<ChatInvitation> InviteUserToChat(String email, int chatId);
+        Task<int> AcceptInvitation(int id);
         Task<ChatUser> AddUserToChat(String UserId, int chatId);
     }
 }

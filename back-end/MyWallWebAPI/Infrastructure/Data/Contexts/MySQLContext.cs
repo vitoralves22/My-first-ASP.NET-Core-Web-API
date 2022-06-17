@@ -22,7 +22,9 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
         public DbSet<MessageReceiver> MessageReceiver { get; set; }
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<ApplicationRole> Role { get; set; }
-       
+
+        public DbSet<ChatInvitation> ChatInvitation { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,6 +79,20 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
                    .WithMany(l => l.Likes)
                    .HasForeignKey(pi => pi.PostId);
 
+            modelBuilder.Entity<ChatInvitation>()
+                   .HasOne(p => p.Chat)
+                   .WithMany(p => p.Invitations)
+                   .HasForeignKey(pi => pi.ChatId);
+
+            modelBuilder.Entity<ChatInvitation>()
+                  .HasOne(p => p.Sender)
+                  .WithMany(p => p.SendedInvitations)
+                  .HasForeignKey(pi => pi.SenderId);
+
+            modelBuilder.Entity<ChatInvitation>()
+                  .HasOne(p => p.Receiver)
+                  .WithMany(p => p.ReceivedInvitations)
+                  .HasForeignKey(pi => pi.ReceiverId);
 
             modelBuilder.Entity<Post>();
 

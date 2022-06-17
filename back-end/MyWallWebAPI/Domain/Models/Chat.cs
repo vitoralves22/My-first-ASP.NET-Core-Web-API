@@ -22,5 +22,10 @@ namespace MyWallWebAPI.Domain.Models
         public List<Message> Messages { get; set; }
 
         public DateTime Data { get; set; }
+
+        [JsonIgnore]
+        public List<ChatInvitation> Invitations { get; set; }
+
+
     }
 }

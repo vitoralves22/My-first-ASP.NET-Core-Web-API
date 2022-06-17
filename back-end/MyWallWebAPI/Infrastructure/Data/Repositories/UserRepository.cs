@@ -31,6 +31,13 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             return user;
         }
 
+        public async Task<ApplicationUser> GetUserByEmail(string email)
+        {
+            ApplicationUser user = await _context.User.FindAsync(email);
+
+            return user;
+        }
+
         public async Task<ApplicationUser> CreateUser(ApplicationUser user)
         {
             var ret = await _context.User.AddAsync(user);

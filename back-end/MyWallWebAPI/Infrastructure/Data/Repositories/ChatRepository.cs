@@ -49,6 +49,32 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             return ret.Entity;
         }
 
+
+        public async Task<ChatInvitation> CreateChatInvitation(ChatInvitation chatInvitation)
+        {
+            var ret = await _context.ChatInvitation.AddAsync(chatInvitation);
+
+            await _context.SaveChangesAsync();
+
+            ret.State = EntityState.Detached;
+
+            return ret.Entity;
+        }
+
+        public async Task<int> UpdateChatInvitation(ChatInvitation chatInvitation)
+        {
+            _context.Entry(chatInvitation).State = EntityState.Modified;
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<ChatInvitation> GetChatInvitationById(int ChatInvitationId)
+        {
+            ChatInvitation chatInvitation = await _context.ChatInvitation.Where(p => p.Id == ChatInvitationId).OrderBy(p => p.Data).Include(p => p.Sender).Include(p => p.Receiver).Include(p => p.Chat).FirstOrDefaultAsync();
+
+            return chatInvitation;
+        }
+
         public async Task<ChatUser> CreateChatUser(ChatUser chatUser)
         {
             var ret = await _context.ChatUser.AddAsync(chatUser);

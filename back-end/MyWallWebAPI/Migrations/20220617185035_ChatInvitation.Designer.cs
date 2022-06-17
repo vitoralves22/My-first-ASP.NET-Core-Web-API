@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWallWebAPI.Infrastructure.Data.Contexts;
 
 namespace MyWallWebAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    partial class MySQLContextModelSnapshot : ModelSnapshot
+    [Migration("20220617185035_ChatInvitation")]
+    partial class ChatInvitation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,9 +245,6 @@ namespace MyWallWebAPI.Migrations
                     b.Property<int>("ChatId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<bool>("IsAccepted")
                         .HasColumnType("tinyint(1)");
 
@@ -266,7 +265,7 @@ namespace MyWallWebAPI.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("ChatInvitation");
+                    b.ToTable("ChatInvite");
                 });
 
             modelBuilder.Entity("MyWallWebAPI.Domain.Models.ChatUser", b =>

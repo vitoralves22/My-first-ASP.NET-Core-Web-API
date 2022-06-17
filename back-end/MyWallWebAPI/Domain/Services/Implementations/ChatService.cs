@@ -1,4 +1,5 @@
-﻿using MyWallWebAPI.Domain.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using MyWallWebAPI.Domain.Models;
 using MyWallWebAPI.Domain.Models.DTOs;
 using MyWallWebAPI.Domain.Services.Interfaces;
 using MyWallWebAPI.Infrastructure.Data.Repositories;
@@ -14,12 +15,14 @@ namespace MyWallWebAPI.Domain.Services.Implementations
         private readonly ChatRepository _chatRepository;
         private readonly MessageRepository _messageRepository;
         private readonly IAuthService _authService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ChatService(MessageRepository messageRepository, ChatRepository ChatRepository, IAuthService authService)
+        public ChatService(MessageRepository messageRepository, ChatRepository ChatRepository, IAuthService authService, UserManager<ApplicationUser> userManager)
         {
             _authService = authService;
             _chatRepository = ChatRepository;
             _messageRepository = messageRepository;
+            _userManager = userManager;
         }
 
         public async Task<List<ChatDTO>> ListChat()
@@ -286,6 +289,50 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             };
 
             return await _chatRepository.CreateChatUser(chatUser);
+
+        }
+
+        public async Task<ChatInvitation> InviteUserToChat(String email, int chatId)
+        {
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
+            /*ApplicationUser findUser = await _authService.GetUserByEmail(email);*/
+            ApplicationUser findUser = await _userManager.FindByEmailAsync(email);
+            Chat chat = await _chatRepository.GetChatById(chatId);
+
+
+            if (findUser == null)
+                throw new ArgumentException("Usuário não encontrado!");
+
+            if (chat == null)
+                throw new ArgumentException("Chat não encontrado!");
+
+            ChatInvitation chatInvitation = new()
+            {
+                Chat = chat,
+                ChatId = chat.Id,
+                Sender = currentUser,
+                SenderId = currentUser.Id,
+                Receiver = findUser,
+                ReceiverId = findUser.Id,
+                Data = DateTime.Now
+            };
+
+            return await _chatRepository.CreateChatInvitation(chatInvitation);
+        }
+
+        public async Task<int> AcceptInvitation(int invitationId)
+        {
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
+            ChatInvitation chatInvitation = await _chatRepository.GetChatInvitationById(invitationId);
+
+            if (chatInvitation == null)
+                throw new ArgumentException("Convite não encontrado!");
+
+            chatInvitation.IsAccepted = true;
+
+            await AddUserToChat(chatInvitation.ReceiverId, chatInvitation.ChatId);
+
+            return await _chatRepository.UpdateChatInvitation(chatInvitation);
 
         }
 

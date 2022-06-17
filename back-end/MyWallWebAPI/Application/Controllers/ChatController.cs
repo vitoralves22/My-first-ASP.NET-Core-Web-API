@@ -83,6 +83,37 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
+        [HttpPost("send-invitation")]
+        public async Task<ActionResult> SendInvititation([FromQuery] String email, int chatId)
+        {
+            try
+            {
+                ChatInvitation chatInvitation = await _chatService.InviteUserToChat(email, chatId);
+
+                return Ok(chatInvitation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("accept-invitation")]
+        public async Task<ActionResult> AcceptInvititation([FromQuery] int ChatInvitationId)
+        {
+            try
+            {
+                int chatInvitation = await _chatService.AcceptInvitation(ChatInvitationId);
+
+                return Ok(chatInvitation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpPost("send-message")]
         public async Task<ActionResult> SendMessage([FromBody] MessageDTO messageDTO)
         {

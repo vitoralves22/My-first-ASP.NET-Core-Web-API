@@ -51,6 +51,16 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return user;
         }
 
+        public async Task<ApplicationUser> GetUserByEmail(string email)
+        {
+            ApplicationUser user = await _userRepository.GetUserByEmail(email);
+
+            if (user == null)
+                throw new ArgumentException("Usuário não existe!");
+
+            return user;
+        }
+
         public async Task<bool> SignUp(SignUpDTO signUpDTO)
         {
             var userExists = await _userManager.FindByNameAsync(signUpDTO.Username);

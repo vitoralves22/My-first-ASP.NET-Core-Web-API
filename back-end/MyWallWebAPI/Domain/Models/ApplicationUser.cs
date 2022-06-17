@@ -27,5 +27,11 @@ namespace MyWallWebAPI.Domain.Models
 
         [JsonIgnore]
         public List<MessageReceiver> MessageReceivers { get; set; }
+
+        [JsonIgnore]
+        public List<ChatInvitation> SendedInvitations { get; set; }
+
+        [JsonIgnore]
+        public List<ChatInvitation> ReceivedInvitations { get; set; }
     }
 }

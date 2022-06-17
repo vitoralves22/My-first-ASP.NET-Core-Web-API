@@ -11,6 +11,7 @@ namespace MyWallWebAPI.Domain.Services.Interfaces
     {
         Task<List<ApplicationUser>> ListUsers();
         Task<ApplicationUser> GetUserById(string userId);
+        Task<ApplicationUser> GetUserByEmail(string email);
         Task<int> UpdateUser(ApplicationUser user);
         Task<bool> DeleteUser(string userId);
         Task<bool> SignUp(SignUpDTO signUpDTO);
