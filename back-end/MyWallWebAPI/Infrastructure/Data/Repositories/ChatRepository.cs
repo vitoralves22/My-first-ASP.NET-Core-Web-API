@@ -49,6 +49,17 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             return ret.Entity;
         }
 
+        public async Task<ChatUser> CreateChatUser(ChatUser chatUser)
+        {
+            var ret = await _context.ChatUser.AddAsync(chatUser);
+
+            await _context.SaveChangesAsync();
+
+            ret.State = EntityState.Detached;
+
+            return ret.Entity;
+        }
+
         public async Task<List<ChatUser>> ListChatUsersByChatId(int Chatid)
         {
             List<ChatUser> list = await _context.ChatUser.Where(p => p.ChatId.Equals(Chatid)).ToListAsync();
@@ -61,6 +72,16 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             List<ChatUser> list = await _context.ChatUser.Where(p => p.ApplicationUserId.Equals(Userid)).ToListAsync();
 
             return list;
+        }
+
+        public async Task<bool> DeleteChatAsync(int chatId)
+        {
+            var item = await _context.Chat.FindAsync(chatId);
+            _context.Chat.Remove(item);
+
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
     }

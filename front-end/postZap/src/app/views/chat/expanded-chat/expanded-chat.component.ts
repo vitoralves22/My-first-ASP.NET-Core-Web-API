@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/app/shared/model';
 import { Message } from 'src/app/shared/model';
@@ -13,13 +14,25 @@ export class ExpandedChatComponent implements OnInit {
   messages?: Message[];
   loaded: boolean = false;
   chatId!: number;
+  chat!: Chat;
+  members?: String[];
+  messageForm!: FormGroup;
 
-  constructor(public chatService: ChatService, private route: ActivatedRoute) {
-    this.route.params.subscribe((params) => (this.chatId = params['id']));
+  constructor(
+      public chatService: ChatService,
+      private route: ActivatedRoute,
+      private formBuilder: FormBuilder,
+  ) {
+      this.route.params.subscribe((params) => (this.chatId = params['id']));
   }
 
   ngOnInit(): void {
     this.listMessagesInChat(this.chatId);
+    this.getChatById(this.chatId);
+    this.messageForm = this.formBuilder.group({
+      chatId: [this.chatId, Validators.required],
+      content: ['', Validators.required]
+  });
   }
 
   listMessagesInChat(id: number) {
@@ -29,12 +42,18 @@ export class ExpandedChatComponent implements OnInit {
     });
   }
 
-  getChatById(){
-
+  getChatById(id: number){
+    this.chatService.getChat(id).subscribe((data) => {
+      this.chat = data;
+      this.members = data.chatMembers;
+      this.loaded = true;
+    });
   }
 
   sendMessage(){
-
+    this.chatService.sendMessage(this.messageForm.value).subscribe((result) => {});
+    this.messageForm.reset();
+    window.location.reload();
   }
 
 }

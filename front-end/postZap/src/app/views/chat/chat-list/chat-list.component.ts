@@ -12,9 +12,10 @@ import { Router } from '@angular/router';
 export class ChatListComponent implements OnInit {
   chats?: Chat[];
   loaded: boolean = false;
-  router!: Router;
+
   constructor(
-    public chatService: ChatService
+    public chatService: ChatService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -29,8 +30,7 @@ export class ChatListComponent implements OnInit {
   }
 
   openChat(id: number){
-    this.router.navigateByUrl('expandedchat');
-    this.chatService.listMessagesInChat(id)
+    this.router.navigateByUrl('expandedchat/' + id);
   }
 
 }

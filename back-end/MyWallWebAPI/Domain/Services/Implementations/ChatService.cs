@@ -41,14 +41,29 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return result;
         }
 
-        public async Task<Chat> GetChat(int chatId)
+        public async Task<ChatDTO> GetChat(int chatId)
         {
             Chat chat = await _chatRepository.GetChatById(chatId);
+            List<string> names = new();
+            List<ChatUser> chatUsers = await _chatRepository.GetChatUsersByChatId(chat.Id);
 
             if (chat == null)
                 throw new ArgumentException("Post não existe!");
 
-            return chat;
+            foreach (ChatUser chatUser in chatUsers)
+            {
+                names.Add(chatUser.ApplicationUser.UserName);
+            }
+
+            ChatDTO chatDTO = new()
+            {
+                ChatId = chatId,
+                ChatMembers = names,
+                Data = chat.Data,
+                InitiatorName = chat.Initiator.UserName
+            };
+
+            return chatDTO;
         }
 
 
@@ -251,6 +266,29 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return await _messageRepository.UpdateMessage(findMessage);
         }
 
-       
+        public async Task<ChatUser> AddUserToChat(String UserId, int chatId)
+        {
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
+            ApplicationUser findUser = await _authService.GetUserById(UserId);
+            Chat findchat = await _chatRepository.GetChatById(chatId);
+
+            if (findUser == null)
+            {
+                throw new ArgumentException("Usuário não encontrado!");
+            }
+
+            ChatUser chatUser = new()
+            {
+                ApplicationUser = findUser,
+                ApplicationUserId = findUser.Id,
+                ChatId = findchat.Id,
+                Chat = findchat
+            };
+
+            return await _chatRepository.CreateChatUser(chatUser);
+
+        }
+
+
     }
 }

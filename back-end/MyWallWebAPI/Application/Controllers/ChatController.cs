@@ -68,6 +68,21 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
+        [HttpPost("add-user")]
+        public async Task<ActionResult> AddUser([FromQuery] string userId, int chatId)
+        {
+            try
+            {
+                ChatUser chatUser = await _chatService.AddUserToChat(userId, chatId);
+
+                return Ok(chatUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("send-message")]
         public async Task<ActionResult> SendMessage([FromBody] MessageDTO messageDTO)
         {
