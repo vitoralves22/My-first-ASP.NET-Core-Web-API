@@ -10,6 +10,8 @@ import { PostService } from 'src/app/shared/service/post.service';
 })
 export class PostFormComponent implements OnInit {
   public postForm!: FormGroup;
+  error = '';
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -26,9 +28,13 @@ export class PostFormComponent implements OnInit {
 
   createPost() {
     console.log(this.postForm.value);
-    this.rest.postPosts(this.postForm.value).subscribe((result) => {});
+    this.rest.postPosts(this.postForm.value).subscribe((result) => {},
+    error => {
+        this.error = error.error;
+        console.log(error)
+        this.loading = false;
+    });
     this.postForm.reset();
-    window.location.reload();
   }
 
   deletePost(id: number) {

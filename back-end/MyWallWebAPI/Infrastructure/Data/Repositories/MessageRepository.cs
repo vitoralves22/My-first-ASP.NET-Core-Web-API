@@ -16,27 +16,6 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             _context = context;
         }
 
-        public async Task<List<Message>> ListMessages()
-        {
-            List<Message> list = await _context.Message.OrderBy(p => p.Data).ToListAsync();
-
-            return list;
-        }
-
-        public async Task<List<Message>> ListMessagesByChatId(int ChatId)
-        {
-            List <Message> messages = await _context.Message.Where(p => p.ChatId == ChatId && p.IsDeletedBySender == false).OrderBy(p => p.Data).Include(p => p.MessageReceivers).Include(p => p.Chat).ToListAsync();
-
-            return messages;
-        }
-
-        public async Task<Message> GetMessageById(int MessageId)
-        {
-           Message message = await _context.Message.Include(p => p.Sender).Include(p => p.MessageReceivers).FirstOrDefaultAsync((p => p.Id == MessageId));
-
-           return message;
-        }
-
         public async Task<Message> CreateMessage(Message message)
         {
             var ret = await _context.Message.AddAsync(message);
@@ -46,6 +25,13 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             ret.State = EntityState.Detached;
 
             return ret.Entity;
+        }
+
+        public async Task<Message> GetMessageById(int MessageId)
+        {
+            Message message = await _context.Message.Include(p => p.Sender).Include(p => p.MessageReceivers).FirstOrDefaultAsync((p => p.Id == MessageId));
+
+            return message;
         }
 
         public async Task<int> UpdateMessage(Message message)
@@ -63,6 +49,20 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<List<Message>> ListMessages()
+        {
+            List<Message> list = await _context.Message.OrderBy(p => p.Data).ToListAsync();
+
+            return list;
+        }
+
+        public async Task<List<Message>> ListMessagesByChatId(int ChatId)
+        {
+            List <Message> messages = await _context.Message.Where(p => p.ChatId == ChatId && p.IsDeletedBySender == false).OrderBy(p => p.Data).Include(p => p.MessageReceivers).Include(p => p.Chat).ToListAsync();
+
+            return messages;
         }
     }
 }

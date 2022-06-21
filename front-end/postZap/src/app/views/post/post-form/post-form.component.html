@@ -15,6 +15,7 @@
                 <button class="btn btn-primary" (click)="createPost()">Postar</button>
               </div>
           </form>
+          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </div>
       </div>
     </div>

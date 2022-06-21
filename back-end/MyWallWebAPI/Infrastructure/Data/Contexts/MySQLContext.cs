@@ -22,9 +22,7 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
         public DbSet<MessageReceiver> MessageReceiver { get; set; }
         public DbSet<ApplicationUser> User { get; set; }
         public DbSet<ApplicationRole> Role { get; set; }
-
         public DbSet<ChatInvitation> ChatInvitation { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -95,8 +93,6 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
                   .HasForeignKey(pi => pi.ReceiverId);
 
             modelBuilder.Entity<Post>();
-
-           
 
         }
     }

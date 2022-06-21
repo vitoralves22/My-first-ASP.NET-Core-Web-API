@@ -8,17 +8,21 @@ using System.Threading.Tasks;
 namespace MyWallWebAPI.Domain.Services.Interfaces
 {
     public interface IChatService
-    {
-        Task<List<MessageDTO>> ListMessagesInChat(int ChatId);
-        Task<List<ChatDTO>> ListChat();
+    {   
         Task<String> IniciateChat(List<string> usersId);
+        Task<ChatDTO> GetChat(int chatId);
+        Task<List<ChatDTO>> ListChat();
+        Task<ChatUser> AddUserToChat(String UserId, int chatId);
+        Task<bool> RemoveUserFromChat(String UserId, int chatId);
+
+        Task<List<MessageDTO>> ListMessagesInChat(int ChatId);
         Task<String> SendMessage(MessageDTO messageDTO);
         Task<bool> DeleteMessage(int messageId);
         Task<int> UpdateMessage(Message message);
-        Task<ChatDTO> GetChat(int chatId);
-       /* Task<String> RemoveUserFromChat(int chatId, ApplicationUser User);*/
+       
         Task<ChatInvitation> InviteUserToChat(String email, int chatId);
         Task<int> AcceptInvitation(int id);
-        Task<ChatUser> AddUserToChat(String UserId, int chatId);
+        Task<int> DenyInvitation(int id);
+        
     }
 }

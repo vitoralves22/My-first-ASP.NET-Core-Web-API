@@ -34,33 +34,6 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             _signInManager = signInManager;
         }
 
-        public async Task<List<ApplicationUser>> ListUsers()
-        {
-            List<ApplicationUser> listUsers = await _userRepository.ListUsers();
-
-            return listUsers;
-        }
-
-        public async Task<ApplicationUser> GetUserById(string userId)
-        {
-            ApplicationUser user = await _userRepository.GetUser(userId);
-
-            if (user == null)
-                throw new ArgumentException("Usuário não existe!");
-
-            return user;
-        }
-
-        public async Task<ApplicationUser> GetUserByEmail(string email)
-        {
-            ApplicationUser user = await _userRepository.GetUserByEmail(email);
-
-            if (user == null)
-                throw new ArgumentException("Usuário não existe!");
-
-            return user;
-        }
-
         public async Task<bool> SignUp(SignUpDTO signUpDTO)
         {
             var userExists = await _userManager.FindByNameAsync(signUpDTO.Username);
@@ -133,11 +106,12 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return ssoDTO;
         }
 
-        public async Task<ApplicationUser> GetCurrentUser()
+        public async Task<ApplicationUser> GetUserById(string userId)
         {
-            var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User); // Get user id:
-
             ApplicationUser user = await _userRepository.GetUser(userId);
+
+            if (user == null)
+                throw new ArgumentException("Usuário não existe!");
 
             return user;
         }
@@ -165,6 +139,22 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             await _userRepository.DeleteUser(userId);
 
             return true;
+        }
+
+        public async Task<ApplicationUser> GetCurrentUser()
+        {
+            var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User); // Get user id:
+
+            ApplicationUser user = await _userRepository.GetUser(userId);
+
+            return user;
+        }
+
+        public async Task<List<ApplicationUser>> ListUsers()
+        {
+            List<ApplicationUser> listUsers = await _userRepository.ListUsers();
+
+            return listUsers;
         }
     }
 }

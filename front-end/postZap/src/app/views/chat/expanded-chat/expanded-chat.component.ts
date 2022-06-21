@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/app/shared/model';
@@ -34,6 +34,10 @@ export class ExpandedChatComponent implements OnInit {
       content: ['', Validators.required]
   });
   }
+
+  // ngOnChanges(changes: SimpleChanges): void{
+
+  // }
 
   listMessagesInChat(id: number) {
     this.chatService.listMessagesInChat(id).subscribe((data) => {

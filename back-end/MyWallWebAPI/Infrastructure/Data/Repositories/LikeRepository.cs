@@ -16,6 +16,41 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             _context = context;
         }
 
+        public async Task<Like> CreateLike(Like like)
+        {
+            var ret = await _context.Like.AddAsync(like);
+
+            await _context.SaveChangesAsync();
+
+            ret.State = EntityState.Detached;
+
+            return ret.Entity;
+        }
+
+        public async Task<Like> GetLikeById(int likeId)
+        {
+            Like like = await _context.Like.Include(p => p.ApplicationUser).Include(p => p.Post).FirstOrDefaultAsync((p => p.Id == likeId));
+
+            return like;
+        }
+
+        public async Task<int> UpdateLike(Like like)
+        {
+            _context.Entry(like).State = EntityState.Modified;
+
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteLikeAsync(int likeId)
+        {
+            var item = await _context.Like.FindAsync(likeId);
+            _context.Like.Remove(item);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<List<Like>> ListLikes()
         {
             List<Like> list = await _context.Like.OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(p => p.Post).ToListAsync();
@@ -42,41 +77,6 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             List<Like> list = await _context.Like.Where(p => p.PostId.Equals(postId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(p => p.Post).ToListAsync();
 
             return list;
-        }
-
-        public async Task<Like> GetLikeById(int likeId)
-        {
-            Like like = await _context.Like.Include(p => p.ApplicationUser).Include(p => p.Post).FirstOrDefaultAsync((p => p.Id == likeId));
-
-            return like;
-        }
-
-        public async Task<Like> CreateLike(Like like)
-        {
-            var ret = await _context.Like.AddAsync(like);
-
-            await _context.SaveChangesAsync();
-
-            ret.State = EntityState.Detached;
-
-            return ret.Entity;
-        }
-
-        public async Task<int> UpdateLike(Like like)
-        {
-            _context.Entry(like).State = EntityState.Modified;
-
-            return await _context.SaveChangesAsync();
-        }
-
-        public async Task<bool> DeleteLikeAsync(int likeId)
-        {
-            var item = await _context.Like.FindAsync(likeId);
-            _context.Like.Remove(item);
-
-            await _context.SaveChangesAsync();
-
-            return true;
         }
     }
 }

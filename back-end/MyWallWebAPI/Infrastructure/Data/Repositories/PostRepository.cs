@@ -16,27 +16,6 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             _context = context;
         }
 
-        public async Task<List<Post>> ListPosts()
-        {
-            List<Post> list = await _context.Post.OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(l => l.Likes).ToListAsync();
-
-            return list;
-        }
-
-        public async Task<List<Post>> ListPostsByApplicationUserId(string applicationUserId)
-        {
-            List<Post> list = await _context.Post.Where(p => p.ApplicationUserId.Equals(applicationUserId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(l => l.Likes).ToListAsync();
-
-            return list;
-        }
-
-        public async Task<Post> GetPostById(int postId)
-        {
-            Post post = await _context.Post.Include(p => p.ApplicationUser).Include(l => l.Likes).FirstOrDefaultAsync((p => p.Id == postId));
-
-            return post;
-        }
-
         public async Task<Post> CreatePost(Post post)
         {
             var ret = await _context.Post.AddAsync(post);
@@ -46,6 +25,13 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             ret.State = EntityState.Detached;
 
             return ret.Entity;
+        }
+
+        public async Task<Post> GetPostById(int postId)
+        {
+            Post post = await _context.Post.Include(p => p.ApplicationUser).Include(l => l.Likes).FirstOrDefaultAsync((p => p.Id == postId));
+
+            return post;
         }
 
         public async Task<int> UpdatePost(Post post)
@@ -63,6 +49,20 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<List<Post>> ListPosts()
+        {
+            List<Post> list = await _context.Post.OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(l => l.Likes).ToListAsync();
+
+            return list;
+        }
+
+        public async Task<List<Post>> ListPostsByApplicationUserId(string applicationUserId)
+        {
+            List<Post> list = await _context.Post.Where(p => p.ApplicationUserId.Equals(applicationUserId)).OrderBy(p => p.Data).Include(p => p.ApplicationUser).Include(l => l.Likes).ToListAsync();
+
+            return list;
         }
     }
 }

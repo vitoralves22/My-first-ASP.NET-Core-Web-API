@@ -17,27 +17,6 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             _context = context;
         }
 
-        public async Task<List<ApplicationUser>> ListUsers()
-        {
-            List<ApplicationUser> list = await _context.User.ToListAsync();
-
-            return list;
-        }
-
-        public async Task<ApplicationUser> GetUser(string userId)
-        {
-            ApplicationUser user = await _context.User.FindAsync(userId);
-
-            return user;
-        }
-
-        public async Task<ApplicationUser> GetUserByEmail(string email)
-        {
-            ApplicationUser user = await _context.User.FindAsync(email);
-
-            return user;
-        }
-
         public async Task<ApplicationUser> CreateUser(ApplicationUser user)
         {
             var ret = await _context.User.AddAsync(user);
@@ -47,6 +26,13 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             ret.State = EntityState.Detached;
 
             return ret.Entity;
+        }
+
+        public async Task<ApplicationUser> GetUser(string userId)
+        {
+            ApplicationUser user = await _context.User.FindAsync(userId);
+
+            return user;
         }
 
         public async Task<int> UpdateUser(ApplicationUser user)
@@ -65,5 +51,13 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
 
             return true;
         }
+
+        public async Task<List<ApplicationUser>> ListUsers()
+        {
+            List<ApplicationUser> list = await _context.User.ToListAsync();
+
+            return list;
+        }
+       
     }
 }

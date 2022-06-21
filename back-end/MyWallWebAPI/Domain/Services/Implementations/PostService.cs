@@ -52,6 +52,15 @@ namespace MyWallWebAPI.Domain.Services.Implementations
         {
             ApplicationUser currentUser = await _authService.GetCurrentUser();
 
+            if ((post.Titulo == null || post.Titulo == "") && (post.Conteudo == null || post.Conteudo == ""))
+                throw new ArgumentException("Para realizar uma publicação, todos os campos devem ser preenchidos.");
+
+            if (post.Titulo == null || post.Titulo == "")
+                throw new ArgumentException("Escolha um titulo para sua publicação.");
+
+            if (post.Conteudo == null || post.Conteudo == "")
+                throw new ArgumentException("Digite o conteúdo da sua publicação");
+
             Post novoPost = new()
             {
                 ApplicationUserId = currentUser.Id,
