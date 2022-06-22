@@ -45,4 +45,10 @@ export class PostService {
     return this.http.post<number>(environment.apiUrl + '/like/do-like', postId, this.httpOptions);
   }
 
+  undoLike(postId: number): Observable<number> {
+    console.log('post id:', postId)
+    return this.http.post<number>(environment.apiUrl + '/like/undo-like', postId, this.httpOptions);
+  }
+
+
 }

@@ -5,4 +5,5 @@ export class Chat {
   initiatorName?: string;
   chatMembers?: string[];
   data?: string;
+
 }

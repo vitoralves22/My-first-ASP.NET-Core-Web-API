@@ -17,6 +17,9 @@ export class ExpandedChatComponent implements OnInit {
   chat!: Chat;
   members?: String[];
   messageForm!: FormGroup;
+  error?: '';
+  loading = false;
+
 
   constructor(
       public chatService: ChatService,
@@ -58,6 +61,21 @@ export class ExpandedChatComponent implements OnInit {
     this.chatService.sendMessage(this.messageForm.value).subscribe((result) => {});
     this.messageForm.reset();
     window.location.reload();
+  }
+
+  deleteMessage(id: number){
+    this.chatService.deleteMessage(id).subscribe(d =>{
+    },
+    error => {
+        this.error = error.error;
+        console.log(error)
+        this.loading = false;
+    });
+    console.log("entrei undolike post")
+    console.log(this.error)
+    window.location.reload()
+    // setTimeout(function(){  window.location.reload(); }, 1000);
+
   }
 
 }

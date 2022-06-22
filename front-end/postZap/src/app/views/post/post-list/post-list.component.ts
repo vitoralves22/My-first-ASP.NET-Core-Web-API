@@ -14,6 +14,8 @@ export class PostListComponent implements OnInit {
   loaded1: boolean = false;
   loaded2: boolean = false;
   active = 1;
+  error = '';
+  loading = false;
   constructor(
     public postService: PostService
   ) { }
@@ -47,7 +49,23 @@ export class PostListComponent implements OnInit {
     this.postService.doLike(id).subscribe(d =>{
     });
     console.log("entrei like post")
+    window.location.reload()
     // setTimeout(function(){  window.location.reload(); }, 1000);
+  }
+
+  undoLike(id: number){
+    this.postService.undoLike(id).subscribe(d =>{
+    },
+    error => {
+        this.error = error.error;
+        console.log(error)
+        this.loading = false;
+    });
+    console.log("entrei undolike post")
+    console.log(this.error)
+    window.location.reload()
+    // setTimeout(function(){  window.location.reload(); }, 1000);
+
   }
 
 

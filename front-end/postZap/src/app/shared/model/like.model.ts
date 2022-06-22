@@ -8,4 +8,5 @@ export class Like {
   data?: string;
   post?: Post;
   postId?: number;
+
 }

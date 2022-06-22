@@ -1,4 +1,4 @@
-.vs-card{
+.vs-card {
   border: 1px solid #c9d9e0;
   border-radius: 4px 3px 6px / 2px 4px;
   padding-top: 15px;
@@ -10,7 +10,7 @@
   width: 100%;
 }
 
-.vs-card-title{
+.vs-card-title {
   padding-left:10px;
   padding-top: 0px;
   padding-right: 15px;

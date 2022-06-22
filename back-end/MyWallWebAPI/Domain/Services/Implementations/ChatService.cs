@@ -173,7 +173,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
             return result;
         }
 
-        //Messages
+        
         public async Task<String> SendMessage(MessageDTO messageDTO)
         {
             Chat chat = await _chatRepository.GetChatById(messageDTO.ChatId);

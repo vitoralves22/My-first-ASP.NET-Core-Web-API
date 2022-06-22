@@ -34,4 +34,8 @@ export class ChatService {
     return this.http.post<Message>(environment.apiUrl + '/chat/send-message', message, this.httpOptions);
   }
 
+  deleteMessage(messageId: number): Observable<number> {
+    return this.http.post<number>(environment.apiUrl + '/chat/delete-message', messageId, this.httpOptions);
+  }
+
 }

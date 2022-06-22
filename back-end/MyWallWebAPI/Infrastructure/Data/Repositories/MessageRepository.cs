@@ -60,7 +60,7 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
 
         public async Task<List<Message>> ListMessagesByChatId(int ChatId)
         {
-            List <Message> messages = await _context.Message.Where(p => p.ChatId == ChatId && p.IsDeletedBySender == false).OrderBy(p => p.Data).Include(p => p.MessageReceivers).Include(p => p.Chat).ToListAsync();
+            List <Message> messages = await _context.Message.Where(p => p.ChatId == ChatId && p.IsDeletedBySender == false).OrderBy(p => p.Data).Include(p => p.MessageReceivers).Include(p => p.Chat).Include(p => p.Sender).ToListAsync();
 
             return messages;
         }

@@ -24,9 +24,10 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
         public async Task<List<PostDTO>> ListPosts()
         {
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
             List<Post> list = await _postRepository.ListPosts();
 
-            return PostDTO.toListDTO(list);
+            return PostDTO.toListDTO(list, currentUser);
         }
 
         public async Task<List<PostDTO>> ListPostsByCurrentUser()
@@ -35,7 +36,7 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             List<Post> list = await _postRepository.ListPostsByApplicationUserId(currentUser.Id);
 
-            return PostDTO.toListDTO(list);
+            return PostDTO.toListDTO(list, currentUser);
         }
 
         public async Task<Post> GetPost(int postId)

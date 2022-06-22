@@ -17,10 +17,18 @@
                 </p>
               </div>
             </div>
-            <div class="card-footer text-center">
-              <button class="btn btn-sm" (click)="likePost(post.postId)" aria-label="Like this post.">
-                <img src="assets/thumb.svg" alt="">
-              </button>
+            <div class="card-footer text-end">
+              <div *ngIf="post.likedByMe;then content else other_content">here is ignored</div>
+              <ng-template #content>
+                <button class="btn btn-sm" (click)="undoLike(post.postId)" aria-label="Like this post.">
+                  <img src="assets/thumb-fill.svg" alt="">
+                </button>
+              </ng-template>
+              <ng-template #other_content>
+                <button class="btn btn-sm" (click)="likePost(post.postId)" aria-label="Like this post.">
+                  <img src="assets/thumb.svg" alt="">
+                </button>
+              </ng-template>
               <button class="btn btn-sm" (click)="deletePost(post.postId)" aria-label="Delete this post.">
                 <img src="assets/trash.svg" alt="">
               </button>
@@ -48,10 +56,18 @@
                 </p>
               </div>
             </div>
-            <div class="card-footer text-center">
-              <button class="btn btn-sm" (click)="likePost(post.postId)" aria-label="Like this post.">
-                <img src="assets/thumb.svg" alt="">
-              </button>
+            <div class="card-footer text-end">
+              <div *ngIf="post.likedByMe;then content else other_content">here is ignored</div>
+              <ng-template #content>
+                <button class="btn btn-sm" (click)="undoLike(post.postId)" aria-label="Like this post.">
+                  <img src="assets/thumb-fill.svg" alt="">
+                </button>
+              </ng-template>
+              <ng-template #other_content>
+                <button class="btn btn-sm" (click)="likePost(post.postId)" aria-label="Like this post.">
+                  <img src="assets/thumb.svg" alt="">
+                </button>
+              </ng-template>
               <button class="btn btn-sm" (click)="deletePost(post.postId)" aria-label="Delete this post.">
                 <img src="assets/trash.svg" alt="">
               </button>

@@ -1,29 +1,31 @@
 <div class="container-fluid">
-  <div class="row" style="background-color: #3095d4;">
+  <div class="row" style="background-color: #005d97;">
     <div class="col-md-4 offset-md-4 mt-5 mb-5">
       <div class="card text-center mt-2">
-        <h1 class="card-header">Login</h1>
+        <h1 class="card-header">Register</h1>
         <div class="card-body">
-          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="registerForm" (ngSubmit)="newAccount()">
             <div class="form-group">
               <label for="username">Username</label>
               <input type="text" formControlName="username" class="form-control"/>
             </div>
             <div class="form-group">
+              <label for="username">Email</label>
+              <input type="text" formControlName="email" class="form-control"/>
+            </div>
+            <div class="form-group">
               <label for="password">Password</label>
               <input type="password" formControlName="password" class="form-control" />
-          </div>
-            <button [disabled]="loading" (click)="onSubmit()" class="btn btn-primary mt-3">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" formControlName="confirmPassword" class="form-control" />
+            </div>
+            <button [disabled]="loading" (click)="newAccount()" class="btn btn-primary mt-3">
               <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Login
+              register
             </button>
-            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
           </form>
-        </div>
-        <div class="text-center mt-4">
-          <p>
-            <a href="#" target="_top">Forgot your password?</a>
-          </p>
         </div>
       </div>
     </div>

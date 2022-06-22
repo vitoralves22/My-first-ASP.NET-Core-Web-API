@@ -9,4 +9,6 @@ export class Post {
     likesCount?: String;
     applicationUserId?: string;
     applicationUser?: User;
+    likedByMe?: boolean;
+
 }

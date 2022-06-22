@@ -9,6 +9,7 @@ import { PostListComponent } from './views/post/post-list/post-list.component';
 import { PostFormComponent } from './views/post/post-form/post-form.component';
 import { ChatListComponent } from './views/chat/chat-list/chat-list.component';
 import { ExpandedChatComponent } from './views/chat/expanded-chat/expanded-chat.component';
+import { RegisterComponent } from './views/register/register.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,8 @@ const routes: Routes = [
   },
 
   { path: 'login', component: LoginComponent },
+
+  { path: 'register', component: RegisterComponent },
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' },

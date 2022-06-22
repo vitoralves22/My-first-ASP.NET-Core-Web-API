@@ -125,7 +125,7 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpDelete("delete-message")]
+        [HttpPost("delete-message")]
         public async Task<ActionResult> DeleteMessage([FromBody] int messageId)
         {
             try

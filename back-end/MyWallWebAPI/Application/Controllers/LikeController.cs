@@ -95,7 +95,7 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
-        [HttpDelete("undo-like")]
+        [HttpPost("undo-like")]
         public async Task<ActionResult> UndoLike([FromBody] int postId)
         {
             try
