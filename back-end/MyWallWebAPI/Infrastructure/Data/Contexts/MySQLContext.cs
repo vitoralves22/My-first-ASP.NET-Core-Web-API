@@ -45,7 +45,6 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
                     .WithMany(cu => cu.ChatUsers)
                     .HasForeignKey(c => c.ChatId);   
 
-
             modelBuilder.Entity<MessageReceiver>()
                     .HasOne(r => r.Receiver)
                     .WithMany(mr => mr.MessageReceivers)
@@ -55,7 +54,6 @@ namespace MyWallWebAPI.Infrastructure.Data.Contexts
                     .HasOne(r => r.Message)
                     .WithMany(mr => mr.MessageReceivers)
                     .HasForeignKey(ri => ri.MessageId);
-
 
             modelBuilder.Entity<Message>()
                     .HasOne(c => c.Chat)

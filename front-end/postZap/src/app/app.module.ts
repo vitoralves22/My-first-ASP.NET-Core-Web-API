@@ -4,34 +4,38 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './views/login';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorInterceptor, JwtInterceptor } from './shared/helpers';
-import { LocalDateTimePipe } from './shared/pipe/local-date-time.pipe';
-import { HomeComponent } from './views/home/home.component';
+import { ChatListComponent } from './presentation/pages/chat/chat-list/chat-list.component';
+import { ExpandedChatComponent } from './presentation/pages/chat/expanded-chat/expanded-chat.component';
+import { LoginComponent } from './presentation/pages/auth/login/login.component';
+import { RegisterComponent } from './presentation/pages/auth/register/register.component';
+import { PostFormComponent } from './presentation/pages/post/post-form/post-form.component';
+import { PostListComponent } from './presentation/pages/post/post-list/post-list.component';
+import { HomeComponent } from './presentation/pages/home/home.component';
+import { NavbarComponent } from './presentation/shared/navbar/navbar.component';
+import { SidebarComponent } from './presentation/shared/sidebar/sidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthenticationService } from './shared/service';
-import { SidebarComponent } from './views/sidebar/sidebar.component';
-import { NavbarComponent } from './views/navbar/navbar.component';
-import { PostListComponent } from './views/post/post-list/post-list.component';
-import { PostFormComponent } from './views/post/post-form/post-form.component';
-import { ChatListComponent } from './views/chat/chat-list/chat-list.component';
-import { ExpandedChatComponent } from './views/chat/expanded-chat/expanded-chat.component';
-import { RegisterComponent } from './views/register/register.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor, JwtInterceptor } from './core/interceptors';
+import { AuthenticationService } from './domain/services/authentication.service';
+import { LocalDateTimePipe } from './core/pipe/local-date-time.pipe';
+import { PostFormUpdateComponent } from './presentation/pages/post/post-form-update/post-form-update.component';
+import { ChatInvitationsComponent } from './presentation/pages/chat/chat-invitations/chat-invitations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    HomeComponent,
-    LocalDateTimePipe,
-    SidebarComponent,
-    NavbarComponent,
-    PostListComponent,
-    PostFormComponent,
     ChatListComponent,
     ExpandedChatComponent,
-    RegisterComponent
+    LoginComponent,
+    RegisterComponent,
+    PostFormComponent,
+    PostListComponent,
+    HomeComponent,
+    NavbarComponent,
+    SidebarComponent,
+    LocalDateTimePipe,
+    PostFormUpdateComponent,
+    ChatInvitationsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,8 +43,7 @@ import { RegisterComponent } from './views/register/register.component';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,
-
+    HttpClientModule
   ],
   providers: [
     AuthenticationService,
@@ -51,3 +54,4 @@ import { RegisterComponent } from './views/register/register.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

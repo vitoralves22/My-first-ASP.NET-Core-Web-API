@@ -1,0 +1,37 @@
+.vs-div-row-cards-margin {
+  margin: 44px;
+}
+
+.vs-avatar.vs-avatar-xl {
+  width: 5rem;
+  height: 5rem;
+}
+.vs-avatar {
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  border-radius: 50%;
+  display: inline-block;
+  background: #ced4da no-repeat center/cover;
+  position: relative;
+  text-align: center;
+  color: #868e96;
+  font-weight: 600;
+  vertical-align: bottom;
+}
+
+.vs-card {
+  border: 1px solid #c9d9e0;
+  border-radius: 4px 3px 6px / 2px 4px;
+  padding-top: 15px;
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-bottom: 0%;
+  margin: 5px;
+  height: 100%;
+  width: 100%;
+}
+
+.vs-reject-button{
+  float:right
+}

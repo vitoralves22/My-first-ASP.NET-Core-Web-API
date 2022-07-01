@@ -1,0 +1,60 @@
+
+.vs-chat-messages {
+  display: flex;
+  flex-direction: column;
+  max-height: 800px;
+  overflow-y: scroll
+}
+
+.vs-chat-message-left,
+.vs-chat-message-right {
+  display: flex;
+  flex-shrink: 0
+}
+
+.vs-chat-message-left {
+  margin-right: auto
+}
+
+.vs-chat-message-right {
+  flex-direction: row-reverse;
+  margin-left: auto;
+}
+.vs-py-3 {
+  padding-top: 1rem!important;
+  padding-bottom: 1rem!important;
+}
+.vs-px-4 {
+  padding-right: 1.5rem!important;
+  padding-left: 1.5rem!important;
+}
+.vs-flex-grow-0 {
+  flex-grow: 0!important;
+}
+.vs-border-top {
+  border-top: 1px solid #dee2e6!important;
+}
+
+.vs-list-group-item {
+  margin-right: 8%;
+  margin-bottom: 1%;
+}
+
+
+.rectangle {
+	background: #59a3e9;
+	height: auto;
+	width: auto;
+	position: relative;
+	left:-15px;
+	top: 30px;
+	float: left;
+}
+
+.rectangle h2 {
+	font-size: 30px;
+	color: #fff;
+	padding-top: 6px;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+	text-align: center;
+}

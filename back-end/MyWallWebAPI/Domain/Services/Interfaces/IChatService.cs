@@ -21,8 +21,8 @@ namespace MyWallWebAPI.Domain.Services.Interfaces
         Task<int> UpdateMessage(Message message);
        
         Task<ChatInvitation> InviteUserToChat(String email, int chatId);
+        Task<List<ChatInvitationDTO>> ListReceivedChatInvitationsByCurrentUserId();
         Task<int> AcceptInvitation(int id);
         Task<int> DenyInvitation(int id);
-        
     }
 }

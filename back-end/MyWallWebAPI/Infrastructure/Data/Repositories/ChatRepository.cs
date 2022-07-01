@@ -94,6 +94,19 @@ namespace MyWallWebAPI.Infrastructure.Data.Repositories
             return list;
         }
 
+        public async Task<List<ChatInvitation>> ListReceivedChatInvitationsByCurrentUserId(string Userid)
+        {
+            List<ChatInvitation> list = await _context.ChatInvitation.Where(p => p.ReceiverId.Equals(Userid) && (p.IsAccepted == false) && (p.IsDenied == false)).Include(p => p.Sender).ToListAsync();
+
+            return list;
+        }
+
+        public async Task<List<ChatInvitation>> ListSendedChatInvitationsByCurrentUserId(string Userid)
+        {
+            List<ChatInvitation> list = await _context.ChatInvitation.Where(p => p.SenderId.Equals(Userid) && (p.IsAccepted == false) && (p.IsDenied == false)).ToListAsync();
+
+            return list;
+        }
 
         public async Task<ChatInvitation> CreateChatInvitation(ChatInvitation chatInvitation)
         {

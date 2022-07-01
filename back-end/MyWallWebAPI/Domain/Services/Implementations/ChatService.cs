@@ -395,5 +395,13 @@ namespace MyWallWebAPI.Domain.Services.Implementations
 
             return await _chatRepository.UpdateChatInvitation(chatInvitation);
         }
+
+        public async Task<List<ChatInvitationDTO>> ListReceivedChatInvitationsByCurrentUserId()
+        {
+            ApplicationUser currentUser = await _authService.GetCurrentUser();
+            List<ChatInvitation> chatInvitations = await _chatRepository.ListReceivedChatInvitationsByCurrentUserId(currentUser.Id);
+            
+            return ChatInvitationDTO.toListDTO(chatInvitations);
+        }
     }
 }

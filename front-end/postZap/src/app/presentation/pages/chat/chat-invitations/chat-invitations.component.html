@@ -1,0 +1,19 @@
+<div class="row card-group vs-div-row-cards-margin">
+  <div class="col-md-6 col-xl-3" *ngFor="let chatInvitation of chatInvitations">
+    <div class="card">
+      <div class="card-body">
+        <div class="media align-items-center"><span style="background-image: url(https://bootdey.com/img/Content/avatar/avatar6.png)" class="vs-avatar vs-avatar-xl mr-3"></span>
+          <div class="media-body overflow-hidden">
+            <h5 class="card-text mb-0">{{chatInvitation.senderName}}</h5>
+            <p class="card-text text-uppercase text-muted">Te convidou para uma Conversa</p>
+            <p class="card-text">
+              <button type="button" (click)="acceptChatInvitation(chatInvitation.id)" class="btn btn-success">Aceitar</button>
+              <button type="button" (click)="denyChatInvitation(chatInvitation.id)" class="btn btn-danger vs-reject-button">Rejeitar</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,32 @@
+
+<div class="row card-group vs-div-row-cards-margin">
+  <div class="col-md-4 vs-cards-padding-bottom" *ngFor="let chat of chats">
+    <div class="card vs-card">
+      <div class="card-body">
+        <div class="card-title vs-card-title">
+          <p>
+            <span style="font-size: 0.9rem;">{{chat.chatId}}</span>
+            <span style="font-size: 0.9rem;">{{chat.initiatorName}}</span>
+          </p>
+        </div>
+        <div class="card-text">
+          <p>
+            {{chat.chatMembers}}
+          </p>
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <button class="btn btn-sm" (click)="openChat(chat.chatId)" aria-label="open chat">
+          <img src="assets/images/chat/chat.svg" alt="">
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 ">
+      <div id="vs-wrapper">
+        <a class="btn vs-btn blue hide-text" (click)="newChat()">
+          <span><img src="assets/images/chat/new-chat.svg" alt=""></span>
+        </a>
+      </div>
+  </div>
+</div>

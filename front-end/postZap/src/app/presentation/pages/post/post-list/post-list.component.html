@@ -1,0 +1,99 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a ngbNavLink>Feed</a>
+    <ng-template ngbNavContent>
+      <div class="row card-group vs-div-row-cards-margin">
+        <div class="col-md-4 vs-cards-padding-bottom" *ngFor="let post of posts">
+          <div class="card vs-card">
+            <div class="card-body">
+              <div class="card-title vs-card-title">
+                <div class="row">
+                  <div class="col">
+                    <p>
+                      <span style="font-size: 0.9rem;">De: {{post.owner}}</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <p>
+                      <span style="font-size: 0.9rem;">{{post.titulo}}</span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <p>
+                      <span style="font-size: 0.9rem;">likes: {{post.likesCount}}</span>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+              <div class="card-text">
+                <p>
+                  {{post.conteudo}}
+                </p>
+              </div>
+            </div>
+            <div class="card-footer text-end">
+              <div *ngIf="post.likedByMe;then content else other_content">here is ignored</div>
+              <ng-template #content>
+                <button class="btn btn-sm" (click)="undoLike(post.postId)" aria-label="Like this post.">
+                  <img src="assets/images/post/thumb-fill.svg" alt="">
+                </button>
+              </ng-template>
+              <ng-template #other_content>
+                <button class="btn btn-sm" (click)="likePost(post.postId)" aria-label="Like this post.">
+                  <img src="assets/images/post/thumb.svg" alt="">
+                </button>
+              </ng-template>
+              <button class="btn btn-sm" (click)="editPost(post.postId)" aria-label="Delete this post.">
+                <img src="assets/images/post/edit.svg" alt="">
+              </button>
+              <button class="btn btn-sm" (click)="deletePost(post.postId)" aria-label="Delete this post.">
+                <img src="assets/images/trash.svg" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>Meus Posts</a>
+    <ng-template ngbNavContent>
+      <div class="row card-group vs-div-row-cards-margin">
+        <div class="col-md-4 vs-cards-padding-bottom" *ngFor="let post of myPosts">
+          <div class="card vs-card">
+            <div class="card-body">
+              <div class="card-title vs-card-title">
+                <p>
+                  <span style="font-size: 0.9rem;">{{post.titulo}}</span>
+                </p>
+              </div>
+              <div class="card-text">
+                <p>
+                  {{post.conteudo}}
+                </p>
+              </div>
+            </div>
+            <div class="card-footer text-end">
+              <div *ngIf="post.likedByMe;then content else other_content">here is ignored</div>
+              <ng-template #content>
+                <button class="btn btn-sm" (click)="undoLike(post.postId)" aria-label="Like this post.">
+                  <img src="assets/images/thumb-fill.svg" alt="">
+                </button>
+              </ng-template>
+              <ng-template #other_content>
+                <button class="btn btn-sm" (click)="likePost(post.postId)" aria-label="Like this post.">
+                  <img src="assets/images/thumb.svg" alt="">
+                </button>
+              </ng-template>
+              <button class="btn btn-sm" (click)="deletePost(post.postId)" aria-label="Delete this post.">
+                <img src="assets/images/trash.svg" alt="">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

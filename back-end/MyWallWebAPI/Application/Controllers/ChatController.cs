@@ -196,5 +196,21 @@ namespace MyWallWebAPI.Application.Controllers
             }
         }
 
+
+        [HttpGet("list-my-received-chat-invitations")]
+        public async Task<ActionResult> ListReceivedChatInvitations()
+        {
+            try
+            {
+                List<ChatInvitationDTO> list = await _chatService.ListReceivedChatInvitationsByCurrentUserId();
+
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

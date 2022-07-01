@@ -1,0 +1,78 @@
+<main class="content p-4">
+  <div class="container p-0">
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-12 col-lg-5 col-xl-3 border-right">
+          <div class="vs-px-4 d-none d-md-block">
+            <div class=" pt-3 ps-3">
+              Participantes:
+            </div>
+          </div>
+          <div class='center' style="margin-top:3%; margin-bottom:5%">
+            <ul class="press">
+              <div class="" *ngFor="let member of members">
+                <li class="list-group-item vs-list-group-item">{{member}}</li>
+              </div>
+            </ul>
+            <div class="input-group mb-3 ps-3 pe-2">
+              <input  [(ngModel)]="email" name ="email" type="text" class="form-control" placeholder="Convidar para o chat (Email)">
+              <div class="input-group-append"><button class="btn btn-primary" (click)="sendInvitation()" ><img
+                    src="assets/images/chat/send-invite.svg" alt=""></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-7 col-xl-9">
+          <div class="position-relative">
+            <div class="vs-chat-messages p-4">
+              <div class="" *ngFor="let message of messages">
+                <div *ngIf="message.isMine;then content else other_content">here is ignored</div>
+                <ng-template #content>
+                  <div class="vs-chat-message-right pb-4">
+                    <div class="p-2">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1"
+                        alt="Sharon Lessman" width="40" height="40">
+                      <button class="btn btn-sm" (click)="deleteMessage(message.messageId)"
+                        aria-label="Delete this post.">
+                        <img src="assets/images/chat/delete-message.svg" alt="">
+                      </button>
+                    </div>
+                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                      <div class="font-weight-bold mb-1">Você</div>
+                      {{message.content}}
+                      <div class="text-muted small text-nowrap mt-2">{{message.data | localDateTime}}</div>
+                      <div class="text-muted small text-nowrap mt-2">{{message.footer}}</div>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #other_content>
+                  <div class="vs-chat-message-left pb-4">
+                    <div class="p-2 vs-left-avatar">
+                      <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle"
+                        alt="Chris Wood" width="40" height="40">
+                    </div>
+                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                      <div class="font-weight-bold mb-1">{{message.senderName}}</div>
+                      {{message.content}}
+                      <div class="text-muted small text-nowrap mt-2">{{message.data | localDateTime}}</div>
+                      <div class="text-muted small text-nowrap mt-2">{{message.footer}}</div>
+                    </div>
+
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="messageForm">
+            <div class="vs-flex-grow-0 vs-py-3 vs-px-4 vs-border-top">
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="content" name="content" placeholder="...">
+                <button class="btn btn-primary" (click)="sendMessage()">Enviar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
