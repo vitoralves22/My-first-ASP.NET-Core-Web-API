@@ -23,8 +23,8 @@ export class PostService {
     return this.postRepository.listMyPosts();
   }
 
-  public postPosts(post: any) {
-    return this.postRepository.postPosts(post);
+  public createPost(post: any) {
+    return this.postRepository.createPost(post);
   }
 
   public listUserPosts() {

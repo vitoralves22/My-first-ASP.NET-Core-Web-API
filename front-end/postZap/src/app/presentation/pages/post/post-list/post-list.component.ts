@@ -11,8 +11,8 @@ import { PostService } from 'src/app/domain/services';
 })
 export class PostListComponent implements OnInit {
 
-  posts?: Post[];
-  myPosts?: Post[];
+  posts: Post[] = [];
+  myPosts: Post[] = [];
   loaded1: boolean = false;
   loaded2: boolean = false;
   active: number = 1;

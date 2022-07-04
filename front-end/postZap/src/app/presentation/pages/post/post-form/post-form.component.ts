@@ -9,7 +9,7 @@ import { AuthenticationService, PostService } from 'src/app/domain/services';
   styleUrls: ['./post-form.component.css'],
 })
 export class PostFormComponent implements OnInit {
-  
+
   postForm!: FormGroup;
   error = '';
   loading = false;
@@ -29,7 +29,7 @@ export class PostFormComponent implements OnInit {
 
   createPost() {
     console.log(this.postForm.value);
-    this.rest.postPosts(this.postForm.value).subscribe((result) => {},
+    this.rest.createPost(this.postForm.value).subscribe((result) => {},
     error => {
         this.error = error.error;
         console.log(error)

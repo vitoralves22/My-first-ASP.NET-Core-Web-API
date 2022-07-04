@@ -24,7 +24,7 @@ export class PostRepository {
     return this.http.get<Post[]>(environment.apiUrl + '/post/list-posts-by-current-user')
   }
 
-  public postPosts(post: any) {
+  public createPost(post: any) {
     return this.http.post<any>(environment.apiUrl + '/post/create-post', post, this.httpOptions);
   }
 

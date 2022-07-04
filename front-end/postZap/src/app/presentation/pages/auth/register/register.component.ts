@@ -25,11 +25,11 @@ export class RegisterComponent implements OnInit {
     this.rest.register(this.registerForm.value).subscribe(
       data => {},
       error => {
-          this.error = error.error;
-          console.log(error)
-          this.loading = false;
+        this.error = error.error;
+        console.log(error)
+        this.loading = false;
       }
-  );
+    );
     this.registerForm.reset();
   }
 
